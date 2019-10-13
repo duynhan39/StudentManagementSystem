@@ -21,17 +21,15 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
         didSet {
             switch self.objectType {
             case .student:
-                attributes = Array(Student.entity().attributesByName.keys)
+                attributes = DataModel.Attributes["student"] ?? []
             case .professor:
-                attributes = Array(Professor.entity().attributesByName.keys)
-            case .course:
-                attributes = Array(Course.entity().attributesByName.keys)
+                attributes = DataModel.Attributes["professor"] ?? []
+            default:
+                attributes = []
             }
             refreshUI()
         }
     }
-    
-
     
     
     
@@ -97,6 +95,12 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
 
 }
 
+extension DataModel {
+    static let Attributes = [
+        "student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
+        "professor" : ["First name", "Last name", "Email", "Home address", "Office address"]
+    ]
+}
 
 
 
