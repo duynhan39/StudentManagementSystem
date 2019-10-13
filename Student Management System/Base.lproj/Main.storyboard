@@ -107,7 +107,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="inN-bI-QTt">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="inN-bI-QTt">
                             <connections>
                                 <segue destination="5Yt-ei-UlL" kind="show" identifier="addNewObject" id="tTp-rO-BBv"/>
                             </connections>
@@ -140,9 +140,9 @@
                         <viewLayoutGuide key="safeArea" id="iLw-d8-ud5"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZyI-ll-hrB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="yFQ-5i-LIJ">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="yFQ-5i-LIJ">
                             <connections>
-                                <action selector="saveInfo:" destination="5Yt-ei-UlL" id="TR3-2H-5dk"/>
+                                <action selector="saveInfo:" destination="5Yt-ei-UlL" id="qJh-j1-k3x"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -153,21 +153,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xt-pI-EYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1457.9710144927537" y="-630.13392857142856"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="78g-UF-rmU">
-            <objects>
-                <viewController id="m13-vu-Bt5" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YXT-yc-OTY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="c1X-G8-F9Y"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RYJ-M9-50B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="950.72463768115949" y="-1377.4553571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">

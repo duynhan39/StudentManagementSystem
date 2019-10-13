@@ -22,6 +22,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
 //        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
 //        navigationItem.rightBarButtonItem = addButton
+        
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -33,30 +34,25 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewWillAppear(animated)
     }
 
-    @objc
-    func insertNewObject(_ sender: Any) {
-//        let entityName = "Student"
-        let context = self.fetchedResultsController.managedObjectContext
-//        let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
-        let newStudent = Student(context: context)
-            
-//            NSManagedObject(entity: entity!, insertInto: context)
-        
-//            Event(context: context)
-             
-        // If appropriate, configure the new managed object.
-        newStudent.firstName = "Nhan"
-
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
+//    @objc
+//    func insertNewObject(_ sender: Any) {
+//
+//        let context = self.fetchedResultsController.managedObjectContext
+//        let newStudent = Student(context: context)
+//
+//        // If appropriate, configure the new managed object.
+//        newStudent.firstName = "Nhan"
+//
+//        // Save the context.
+//        do {
+//            try context.save()
+//        } catch {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            let nserror = error as NSError
+//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//        }
+//    }
 
     // MARK: - Segues
 
@@ -113,7 +109,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: UITableViewCell, withStudent student: Student) {
-        cell.textLabel!.text = student.firstName
+        cell.textLabel!.text = student.description
     }
 
     // MARK: - Fetched results controller
@@ -129,7 +125,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "firstName", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "firstName", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         

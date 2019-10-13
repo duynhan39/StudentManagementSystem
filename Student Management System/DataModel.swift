@@ -18,11 +18,6 @@ class DataModel {
         case professor = "Professor"
         case course = "Course"
     }
-    
-    static let Attributes = [
-        "student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
-        "professor" : ["First name", "Last name", "Email", "Home address", "Office address"]
-    ]
 }
 
 //extension NSMutableAttributedString {

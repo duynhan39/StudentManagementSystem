@@ -40,6 +40,10 @@ class NewInfoCell: UITableViewCell {
         }
     }
     
+    func getInputtedContent() -> String {
+        return attributeInputTextField.text ?? ""
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -56,27 +60,42 @@ class NewInfoCell: UITableViewCell {
         
         let gap : CGFloat = 15
         let height: CGFloat = 17
-        attributeNameLabel.anchor(top: topAnchor, left: leftAnchor, bottom:nil, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height, enableInsets: false)
+        attributeNameLabel.anchor(top: topAnchor,
+                                  left: leftAnchor,
+                                  bottom:nil,
+                                  right: rightAnchor,
+                                  paddingTop: gap,
+                                  paddingLeft: gap,
+                                  paddingBottom: gap,
+                                  paddingRight: gap,
+                                  width: self.frame.width-2*gap,
+                                  height: height,
+                                  enableInsets: false)
         
         
         addSubview(attributeInputTextField)
-        attributeInputTextField.anchor(top: attributeNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height*2, enableInsets: false)
-//        attributeInputTextField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        attributeInputTextField.anchor(top: attributeNameLabel.bottomAnchor,
+                                       left: leftAnchor,
+                                       bottom: bottomAnchor,
+                                       right: rightAnchor,
+                                       paddingTop: gap,
+                                       paddingLeft: gap,
+                                       paddingBottom: gap,
+                                       paddingRight: gap,
+                                       width: self.frame.width-2*gap,
+                                       height: height*2,
+                                       enableInsets: false)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
+//
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        // Configure the view for the selected state
+//    }
     
     override func draw(_ rect: CGRect) {
         attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
