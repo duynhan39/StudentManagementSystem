@@ -14,8 +14,7 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var attributeTable: UITableView!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    
-    
+
     
     var attributes = [String]()
     var objectType = DataModel.ObjectType.student {
@@ -56,8 +55,11 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
+    
+//        let formattedString = NSMutableAttributedString()
         
-        cell.attributeLabel.text = attributes[indexPath.row]
+        cell.attributeLabel.text = " \(attributes[indexPath.row])"
+//        attributedText = formattedString.bold(" \(attributes[indexPath.row])")
         
         return cell
     }
@@ -70,16 +72,9 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
             attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
         }
         
-        profileImageView.layer.cornerRadius = profileImageView.frame.height
+        profileImageView.layer.cornerRadius = profileImageView.frame.height*0.5
         
     }
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -101,3 +96,25 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
     
 
 }
+
+
+
+
+//extension NSMutableAttributedString {
+//    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+//        let fontName = "HelveticaNeue-Bold"
+//        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: fontName, size: 17)!]
+//        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+//        append(boldString)
+//
+//        return self
+//    }
+//
+//    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+//        let normal = NSAttributedString(string: text)
+//        append(normal)
+//
+//        return self
+//    }
+//}
+

@@ -9,10 +9,6 @@
         <relationship name="enrolledBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="enrolledIn" inverseEntity="Student"/>
         <relationship name="instructedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Professor" inverseName="instruct" inverseEntity="Professor"/>
     </entity>
-    <entity name="Event" representedClassName="Event" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date"/>
-        <userInfo/>
-    </entity>
     <entity name="Professor" representedClassName="Professor" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
@@ -33,9 +29,8 @@
         <relationship name="enrolledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="enrolledBy" inverseEntity="Course"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-688.64453125" positionY="-418.78125" width="128" height="58"/>
-        <element name="Student" positionX="-461.0234375" positionY="-662.01953125" width="128" height="163"/>
-        <element name="Course" positionX="-558" positionY="-513" width="128" height="148"/>
-        <element name="Professor" positionX="-549" positionY="-504" width="128" height="148"/>
+        <element name="Course" positionX="-657.73828125" positionY="-373.61328125" width="128" height="148"/>
+        <element name="Professor" positionX="-569.39453125" positionY="-654.82421875" width="128" height="148"/>
+        <element name="Student" positionX="-742.703125" positionY="-657.93359375" width="128" height="163"/>
     </elements>
 </model>

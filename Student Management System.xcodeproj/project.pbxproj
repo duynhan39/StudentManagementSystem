@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		540D12242352A1A1007606D9 /* CreateNewObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D12232352A1A1007606D9 /* CreateNewObjectViewController.swift */; };
 		540D12262352A587007606D9 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D12252352A587007606D9 /* DataModel.swift */; };
 		540D12282352AE87007606D9 /* NewInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D12272352AE87007606D9 /* NewInfoCell.swift */; };
+		540D122A2352B80B007606D9 /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D12292352B80B007606D9 /* NewPersonViewController.swift */; };
 		5442CF6B23450B9D00D438AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6A23450B9D00D438AE /* AppDelegate.swift */; };
 		5442CF6E23450B9D00D438AE /* Student_Management_System.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6C23450B9D00D438AE /* Student_Management_System.xcdatamodeld */; };
 		5442CF7023450B9D00D438AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6F23450B9D00D438AE /* SceneDelegate.swift */; };
@@ -21,9 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		540D12232352A1A1007606D9 /* CreateNewObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewObjectViewController.swift; sourceTree = "<group>"; };
 		540D12252352A587007606D9 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		540D12272352AE87007606D9 /* NewInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInfoCell.swift; sourceTree = "<group>"; };
+		540D12292352B80B007606D9 /* NewPersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
 		5442CF6723450B9D00D438AE /* Student Management System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Student Management System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5442CF6A23450B9D00D438AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5442CF6D23450B9D00D438AE /* Student_Management_System.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Student_Management_System.xcdatamodel; sourceTree = "<group>"; };
@@ -68,8 +68,8 @@
 			children = (
 				5442CF6A23450B9D00D438AE /* AppDelegate.swift */,
 				5442CF6F23450B9D00D438AE /* SceneDelegate.swift */,
-				540D12232352A1A1007606D9 /* CreateNewObjectViewController.swift */,
 				5442CF7123450B9D00D438AE /* MasterViewController.swift */,
+				540D12292352B80B007606D9 /* NewPersonViewController.swift */,
 				5442CF7323450B9D00D438AE /* DetailViewController.swift */,
 				5442CF7523450B9D00D438AE /* Main.storyboard */,
 				540D12252352A587007606D9 /* DataModel.swift */,
@@ -153,8 +153,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				540D122A2352B80B007606D9 /* NewPersonViewController.swift in Sources */,
 				540D12262352A587007606D9 /* DataModel.swift in Sources */,
-				540D12242352A1A1007606D9 /* CreateNewObjectViewController.swift in Sources */,
 				540D12282352AE87007606D9 /* NewInfoCell.swift in Sources */,
 				5442CF7223450B9D00D438AE /* MasterViewController.swift in Sources */,
 				5442CF6B23450B9D00D438AE /* AppDelegate.swift in Sources */,
