@@ -8,7 +8,8 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
+
 class NewPersonViewController: UIViewController, UITableViewDataSource {
 
     
@@ -49,7 +50,7 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
         attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
         attributeTable.bounces = false
         
-        
+        attributeTable.separatorStyle = .singleLine
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,9 +64,7 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
         
-//        cell.attributeNameLabel.text = " \(attributes[indexPath.row])"
-
-//        cell.textLabel?.text = " \(attributes[indexPath.row])"
+        cell.labelName = " \(attributes[indexPath.row])"
 
         return cell
     }
@@ -83,8 +82,9 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
         profileImageView.image = UIImage(systemName: "person.circle.fill")
         profileImageView.tintColor = UIColor.black
         
+        
         let tableY = pictureFrame.maxY + displayGap
-        let tableHeight = min(wholeView.frame.height - tableY, attributeTable.contentSize.height)
+        let tableHeight = min(wholeView.frame.height - tableY, attributeTable.contentSize.height*2)
         
         let tableFrame = CGRect(x: 0,
                                 y: tableY,

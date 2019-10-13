@@ -7,22 +7,114 @@
 //
 
 import UIKit
+@IBDesignable
 
 class NewInfoCell: UITableViewCell {
-
-    @IBOutlet weak var attributeNameLabel: UILabel!
-    @IBOutlet weak var attributeInputTextView: UITextView!
     
+    private var attributeNameLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.textColor = .black
+        lbl.font = UIFont.boldSystemFont(ofSize: 17)
+        lbl.textAlignment = .left
+        return lbl
+    }()
+    
+    private var attributeInputTextView : UITextView = {
+        let lbl = UITextView()
+        lbl.textColor = .black
+        lbl.font = UIFont.systemFont(ofSize: 17)
+        lbl.textAlignment = .left
+        return lbl
+    }()
+    
+    
+    var labelName = "" {
+        didSet {
+            attributeNameLabel.text = labelName
+        }
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(attributeNameLabel)
+        labelName = "Attribute"
+        
+        let gap : CGFloat = 15
+        let height: CGFloat = 17
+        attributeNameLabel.anchor(top: topAnchor, left: leftAnchor, bottom:nil, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height, enableInsets: false)
+        
+        
+        addSubview(attributeInputTextView)
+        attributeInputTextView.anchor(top: attributeNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height*2, enableInsets: false)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
+    
+//    override func draw(_ rect: CGRect) {
+//        //        let gap : CGFloat = 8
+//        //        let labelFrame = CGRect(x: gap,
+//        //                                y: gap*0.5,
+//        //                                width: self.frame.width - 2*gap,
+//        //                                height: 17)
+//        //        attributeNameLabel.frame = labelFrame
+//        //        attributeNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: attributeNameLabel.frame.height)
+//    }
+    
+}
 
+
+extension UIView {
+    
+    func anchor (top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat, enableInsets: Bool) {
+        var topInset = CGFloat(0)
+        var bottomInset = CGFloat(0)
+        
+        if #available(iOS 11, *), enableInsets {
+            let insets = self.safeAreaInsets
+            topInset = insets.top
+            bottomInset = insets.bottom
+            
+            print("Top: \(topInset)")
+            print("bottom: \(bottomInset)")
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let top = top {
+            self.topAnchor.constraint(equalTo: top, constant: paddingTop+topInset).isActive = true
+        }
+        if let left = left {
+            self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
+        }
+        if let right = right {
+            rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
+        }
+        if let bottom = bottom {
+            bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom-bottomInset).isActive = true
+        }
+        if height != 0 {
+            heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        if width != 0 {
+            widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
+    }
+    
 }
