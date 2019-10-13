@@ -18,4 +18,29 @@ class DataModel {
         case professor = "Professor"
         case course = "Course"
     }
+    
+    static let Attributes = [
+        "student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
+        "professor" : ["First name", "Last name", "Email", "Home address", "Office address"]
+    ]
 }
+
+//extension NSMutableAttributedString {
+//    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+//        let fontName = "HelveticaNeue-Bold"
+//        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont(name: fontName, size: 17)!]
+//        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+//        append(boldString)
+//
+//        return self
+//    }
+//
+//    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+//        let normal = NSAttributedString(string: text)
+//        append(normal)
+//
+//        return self
+//    }
+//}
+
+

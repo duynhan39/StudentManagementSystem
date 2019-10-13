@@ -126,7 +126,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFP-zb-LVq">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFP-zb-LVq" customClass="NewObjectView" customModule="Student_Management_System" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                             </view>
                         </subviews>
@@ -140,13 +140,18 @@
                         <viewLayoutGuide key="safeArea" id="iLw-d8-ud5"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZyI-ll-hrB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="yFQ-5i-LIJ"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="yFQ-5i-LIJ">
+                            <connections>
+                                <action selector="savePressed:" destination="lhV-h4-UWl" id="lbe-eJ-JWj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="wholeView" destination="qFP-zb-LVq" id="axG-6X-1Dx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xt-pI-EYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="lhV-h4-UWl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1457.9710144927537" y="-630.13392857142856"/>
         </scene>

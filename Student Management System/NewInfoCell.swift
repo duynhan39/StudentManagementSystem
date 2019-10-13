@@ -19,8 +19,8 @@ class NewInfoCell: UITableViewCell {
         return lbl
     }()
     
-    private var attributeInputTextView : UITextView = {
-        let lbl = UITextView()
+    private var attributeInputTextField : UITextField = {
+        let lbl = UITextField()
         lbl.textColor = .black
         lbl.font = UIFont.systemFont(ofSize: 17)
         lbl.textAlignment = .left
@@ -34,8 +34,23 @@ class NewInfoCell: UITableViewCell {
         }
     }
     
+    var placeHolderText = "" {
+        didSet {
+            attributeInputTextField.placeholder = placeHolderText
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         addSubview(attributeNameLabel)
         labelName = "Attribute"
         
@@ -44,12 +59,9 @@ class NewInfoCell: UITableViewCell {
         attributeNameLabel.anchor(top: topAnchor, left: leftAnchor, bottom:nil, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height, enableInsets: false)
         
         
-        addSubview(attributeInputTextView)
-        attributeInputTextView.anchor(top: attributeNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height*2, enableInsets: false)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        addSubview(attributeInputTextField)
+        attributeInputTextField.anchor(top: attributeNameLabel.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: gap, paddingLeft: gap, paddingBottom: gap, paddingRight: gap, width: self.frame.width-2*gap, height: height*2, enableInsets: false)
+//        attributeInputTextField.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
     
     override func awakeFromNib() {
@@ -66,15 +78,9 @@ class NewInfoCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    override func draw(_ rect: CGRect) {
-//        //        let gap : CGFloat = 8
-//        //        let labelFrame = CGRect(x: gap,
-//        //                                y: gap*0.5,
-//        //                                width: self.frame.width - 2*gap,
-//        //                                height: 17)
-//        //        attributeNameLabel.frame = labelFrame
-//        //        attributeNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: attributeNameLabel.frame.height)
-//    }
+    override func draw(_ rect: CGRect) {
+        attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
+    }
     
 }
 

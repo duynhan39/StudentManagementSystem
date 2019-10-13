@@ -18,6 +18,7 @@
 		5442CF7923450B9D00D438AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5442CF7823450B9D00D438AE /* Assets.xcassets */; };
 		5442CF7C23450B9D00D438AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5442CF7A23450B9D00D438AE /* LaunchScreen.storyboard */; };
 		54B4AF3F2352D8D1003CD70B /* NewInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4AF3E2352D8D1003CD70B /* NewInfoCell.swift */; };
+		54B4AF412353CB74003CD70B /* NewObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4AF402353CB74003CD70B /* NewObjectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		5442CF7B23450B9D00D438AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5442CF7D23450B9E00D438AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54B4AF3E2352D8D1003CD70B /* NewInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewInfoCell.swift; sourceTree = "<group>"; };
+		54B4AF402353CB74003CD70B /* NewObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewObjectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				5442CF6F23450B9D00D438AE /* SceneDelegate.swift */,
 				5442CF7123450B9D00D438AE /* MasterViewController.swift */,
 				540D12292352B80B007606D9 /* NewPersonViewController.swift */,
+				54B4AF402353CB74003CD70B /* NewObjectView.swift */,
 				5442CF7323450B9D00D438AE /* DetailViewController.swift */,
 				5442CF7523450B9D00D438AE /* Main.storyboard */,
 				540D12252352A587007606D9 /* DataModel.swift */,
@@ -159,6 +162,7 @@
 				5442CF7223450B9D00D438AE /* MasterViewController.swift in Sources */,
 				5442CF6B23450B9D00D438AE /* AppDelegate.swift in Sources */,
 				5442CF7423450B9D00D438AE /* DetailViewController.swift in Sources */,
+				54B4AF412353CB74003CD70B /* NewObjectView.swift in Sources */,
 				5442CF6E23450B9D00D438AE /* Student_Management_System.xcdatamodeld in Sources */,
 				5442CF7023450B9D00D438AE /* SceneDelegate.swift in Sources */,
 			);
