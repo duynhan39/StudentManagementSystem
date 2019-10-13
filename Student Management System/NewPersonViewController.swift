@@ -9,10 +9,10 @@
 import UIKit
 
 @IBDesignable
-class NewPersonViewController: UIViewController {
+class NewPersonViewController: UIViewController, UITableViewDataSource {
 
     
-    @IBOutlet weak var WholeView: UIView!
+    @IBOutlet weak var wholeView: UIView!
     
     var attributeTable = UITableView()
     var profileImageView = UIImageView()
@@ -40,11 +40,15 @@ class NewPersonViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        attributeTable.dataSource = self
         objectType = DataModel.ObjectType.student
         
-        WholeView.addSubview(profileImageView)
-        WholeView.addSubview(attributeTable)
+        wholeView.addSubview(profileImageView)
+        
+        wholeView.addSubview(attributeTable)
+        attributeTable.dataSource = self
+        attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
+        attributeTable.bounces = false
+        
         
     }
     
@@ -52,51 +56,47 @@ class NewPersonViewController: UIViewController {
         refreshUI()
     }
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return attributes.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
-//
-////        let formattedString = NSMutableAttributedString()
-//
-//        cell.attributeLabel.text = " \(attributes[indexPath.row])"
-////        attributedText = formattedString.bold(" \(attributes[indexPath.row])")
-//
-//        return cell
-//    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return attributes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
+        
+//        cell.attributeNameLabel.text = " \(attributes[indexPath.row])"
+
+//        cell.textLabel?.text = " \(attributes[indexPath.row])"
+
+        return cell
+    }
     
     private func refreshUI() {
-        let pictureEdge = WholeView.frame.width/3
-        let pictureFrame = CGRect(x: WholeView.frame.midX - pictureEdge*0.5,
-                                  y: 15,
+        let displayGap : CGFloat = 15
+        let pictureEdge = wholeView.frame.width/3
+        let pictureFrame = CGRect(x: wholeView.frame.midX - pictureEdge*0.5,
+                                  y: displayGap,
                                   width: pictureEdge,
                                   height: pictureEdge)
         profileImageView.frame = pictureFrame
         profileImageView.layer.cornerRadius = pictureEdge*0.5
         
-        profileImageView.image = UIImage(systemName: "contact")
+        profileImageView.image = UIImage(systemName: "person.circle.fill")
+        profileImageView.tintColor = UIColor.black
         
+        let tableY = pictureFrame.maxY + displayGap
+        let tableHeight = min(wholeView.frame.height - tableY, attributeTable.contentSize.height)
         
-//        pictureFrame.s =
-//        pictureFrame.height =
-//        pictureFrame.width = WholeView.frame.width/3
+        let tableFrame = CGRect(x: 0,
+                                y: tableY,
+                                width: wholeView.frame.width,
+                                height: tableHeight)
         
+        attributeTable.frame = tableFrame
         
-        
-        
-        
-        
-        
-        
-        
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        if attributeTable.numberOfRows(inSection: 0) > 0 {
-//            attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
-//        }
-    
-        
+        let indexPath = IndexPath(row: 0, section: 0)
+        if attributeTable.numberOfRows(inSection: 0) > 0 {
+            attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
+        }
     }
     
     

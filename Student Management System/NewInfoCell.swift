@@ -9,10 +9,10 @@
 import UIKit
 
 class NewInfoCell: UITableViewCell {
+
+    @IBOutlet weak var attributeNameLabel: UILabel!
+    @IBOutlet weak var attributeInputTextView: UITextView!
     
-    
-    @IBOutlet weak var attributeLabel: UILabel!
-    @IBOutlet weak var attributeInfo: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
