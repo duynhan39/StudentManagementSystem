@@ -10,13 +10,15 @@ import UIKit
 
 class AddObjectViewController: UIViewController {
 
-    
-    @IBOutlet weak var wholeView: NewObjectView!
+    @IBOutlet weak var infoQueryView: NewObjectView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
+    
+    
+    
     
     
 
