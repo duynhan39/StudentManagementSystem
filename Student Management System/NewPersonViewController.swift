@@ -8,14 +8,16 @@
 
 import UIKit
 
-class NewPersonViewController: UIViewController, UITableViewDataSource {
+@IBDesignable
+class NewPersonViewController: UIViewController {
 
     
-    @IBOutlet weak var attributeTable: UITableView!
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var WholeView: UIView!
+    
+    var attributeTable = UITableView()
+    var profileImageView = UIImageView()
     
 
-    
     var attributes = [String]()
     var objectType = DataModel.ObjectType.student {
         didSet {
@@ -38,8 +40,11 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        attributeTable.dataSource = self
+//        attributeTable.dataSource = self
         objectType = DataModel.ObjectType.student
+        
+        WholeView.addSubview(profileImageView)
+        WholeView.addSubview(attributeTable)
         
     }
     
@@ -47,30 +52,50 @@ class NewPersonViewController: UIViewController, UITableViewDataSource {
         refreshUI()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attributes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
-    
-//        let formattedString = NSMutableAttributedString()
-        
-        cell.attributeLabel.text = " \(attributes[indexPath.row])"
-//        attributedText = formattedString.bold(" \(attributes[indexPath.row])")
-        
-        return cell
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return attributes.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
+//
+////        let formattedString = NSMutableAttributedString()
+//
+//        cell.attributeLabel.text = " \(attributes[indexPath.row])"
+////        attributedText = formattedString.bold(" \(attributes[indexPath.row])")
+//
+//        return cell
+//    }
     
     private func refreshUI() {
-        self.loadViewIfNeeded()
+        let pictureEdge = WholeView.frame.width/3
+        let pictureFrame = CGRect(x: WholeView.frame.midX - pictureEdge*0.5,
+                                  y: 15,
+                                  width: pictureEdge,
+                                  height: pictureEdge)
+        profileImageView.frame = pictureFrame
+        profileImageView.layer.cornerRadius = pictureEdge*0.5
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        if attributeTable.numberOfRows(inSection: 0) > 0 {
-            attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
-        }
+        profileImageView.image = UIImage(systemName: "contact")
         
-        profileImageView.layer.cornerRadius = profileImageView.frame.height*0.5
+        
+//        pictureFrame.s =
+//        pictureFrame.height =
+//        pictureFrame.width = WholeView.frame.width/3
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        if attributeTable.numberOfRows(inSection: 0) > 0 {
+//            attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
+//        }
+    
         
     }
     
