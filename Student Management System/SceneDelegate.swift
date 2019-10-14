@@ -67,8 +67,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         
         var masterControllers : [MasterViewController?] = []
         
+        var count = 0
+        let modes = DataModel.ObjectType.all
         for viewController in tabBarController.viewControllers! {
             if viewController.title == "Master" {
+                (viewController as! MasterViewController).mode = modes[count]
+                count += 1
                 masterControllers += [viewController as? MasterViewController]
             }
         }

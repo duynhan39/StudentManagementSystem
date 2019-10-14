@@ -17,6 +17,8 @@ class DataModel {
         case student = "Student"
         case professor = "Professor"
         case course = "Course"
+        
+        static var all = [DataModel.ObjectType.student, .professor, .course]
     }
 }
 
