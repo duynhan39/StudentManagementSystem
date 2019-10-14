@@ -11,6 +11,8 @@ import UIKit
 
 class NewInfoCell: UITableViewCell {
     
+    // MARK: Variables
+    
     private var attributeNameLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = .black
@@ -40,10 +42,13 @@ class NewInfoCell: UITableViewCell {
         }
     }
     
+    
+    // MARK: Data function
     func getInputtedContent() -> String {
         return attributeInputTextField.text ?? ""
     }
     
+    // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -97,16 +102,29 @@ class NewInfoCell: UITableViewCell {
 //        // Configure the view for the selected state
 //    }
     
+    // MARK: Draw
     override func draw(_ rect: CGRect) {
         attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
     }
     
 }
 
+// MARK: Extensions
 
 extension UIView {
     
-    func anchor (top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat, enableInsets: Bool) {
+    func anchor (top: NSLayoutYAxisAnchor?,
+                 left: NSLayoutXAxisAnchor?,
+                 bottom: NSLayoutYAxisAnchor?,
+                 right: NSLayoutXAxisAnchor?,
+                 paddingTop: CGFloat,
+                 paddingLeft: CGFloat,
+                 paddingBottom: CGFloat,
+                 paddingRight: CGFloat,
+                 width: CGFloat,
+                 height: CGFloat,
+                 enableInsets: Bool) {
+        
         var topInset = CGFloat(0)
         var bottomInset = CGFloat(0)
         

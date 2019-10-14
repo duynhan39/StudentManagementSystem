@@ -27,7 +27,6 @@ class AddObjectViewController: UIViewController {
         //        fetchedResultsController.managedObjectContext
         
         let newStudent = Student(context: context)
-        
         let inputtedData = infoQueryView.getInputedData()
         
         
@@ -84,6 +83,7 @@ extension Student {
             case "photo":
                 self.photo = newValue as? Data
             default:
+                print("Attribute does not exits")
                 return
             }
         }
@@ -94,7 +94,6 @@ extension Student {
     }
 }
 
-//"Student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
 
 
 
