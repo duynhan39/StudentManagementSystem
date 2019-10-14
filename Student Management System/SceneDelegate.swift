@@ -54,11 +54,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         guard let window = window else { return }
         guard let splitViewController = window.rootViewController as? UISplitViewController else { return }
         guard let navigationController = splitViewController.viewControllers.last as? UINavigationController else { return }
+        
         navigationController.topViewController?.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         navigationController.topViewController?.navigationItem.leftItemsSupplementBackButton = true
+        
         splitViewController.delegate = self
-        
-        
         
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
 //        masterNavigationController.navigationItem.leftBarButtonItem = masterNavigationController.editButtonItem

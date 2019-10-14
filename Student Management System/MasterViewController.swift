@@ -67,7 +67,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let student = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withStudent: student)
+        configureCell(cell, with: student)
         return cell
     }
 
@@ -92,8 +92,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(_ cell: UITableViewCell, withStudent student: Student) {
-        cell.textLabel!.text = student.description
+    func configureCell(_ cell: UITableViewCell, with object: Student) {
+        cell.textLabel!.text = object.description
     }
 
     // MARK: - Fetched results controller
@@ -155,9 +155,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withStudent: anObject as! Student)
+                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! Student)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withStudent: anObject as! Student)
+                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! Student)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
             default:
                 return
