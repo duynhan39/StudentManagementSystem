@@ -11,27 +11,57 @@ import CoreData
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    // MARK: Variables
+    
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
 
-
+    @IBOutlet var tabBar: UITabBar!
+    
+    // MARK: Settup
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = editButtonItem
-        //        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        //        navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        view.addSubview(tabBar)
+
+        
+//
+//        tabBar.anchor(top: nil, left: view.leftAnchor, bottom: margins.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 40, enableInsets: false)
+
+    }
+    
+//    override func viewDidLayoutSubviews() {
+//        <#code#>
+//    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print(tabBar.frame.height)
+//        print("View \(view.frame.height)")
+//        print("Scr \(UIScreen.main.bounds.height)")
+        
+        
+        
+        let margins = view.safeAreaInsets
+//        let navBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        let tabBarHeight = tabBar.frame.height
+        let tabBarFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: tabBarHeight)
+        tabBar.frame = tabBarFrame
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        
+        
     }
     
+    
+    // MARK: Buttons
     
     @IBAction func addNewObject(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
