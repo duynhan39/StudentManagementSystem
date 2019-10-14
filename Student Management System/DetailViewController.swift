@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
 
@@ -17,7 +18,7 @@ class DetailViewController: UIViewController {
         // Update the user interface for the detail item.
         if let detail = detailItem {
             if let label = detailDescriptionLabel {
-                label.text = detail.firstName
+//                label.text = detail.firstName
             }
         }
     }
@@ -28,7 +29,7 @@ class DetailViewController: UIViewController {
         configureView()
     }
 
-    var detailItem: Student? {
+    var detailItem: NSManagedObject? {
         didSet {
             // Update the view.
             configureView()

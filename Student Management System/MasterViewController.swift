@@ -14,7 +14,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
-
+    var mode = DataModel.ObjectType.student
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -45,7 +46,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let indexPath = tableView.indexPathForSelectedRow {
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                
+                switch mode {
+                case .student:
+                    controller.detailItem = object as? Student
+                case .professor:
+                    controller.detailItem = object as? Professor
+                case .course:
+                controller.detailItem = object as? Course
+                
+                }
+                
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 detailViewController = controller
@@ -92,32 +103,57 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(_ cell: UITableViewCell, with object: Student) {
+    func configureCell(_ cell: UITableViewCell, with object: NSManagedObject) {
         cell.textLabel!.text = object.description
     }
 
     // MARK: - Fetched results controller
 
-    var fetchedResultsController: NSFetchedResultsController<Student> {
+    var fetchedResultsController: NSFetchedResultsController<NSManagedObject> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+//        switch mode {
+//        case .student:
+//            let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+//
+//            // Set the batch size to a suitable number.
+//            fetchRequest.fetchBatchSize = 20
+//
+//            // Edit the sort key as appropriate.
+//            let sortDescriptor = NSSortDescriptor(key: "description", ascending: true)
+//
+//            fetchRequest.sortDescriptors = [sortDescriptor]
+//
+//            // Edit the section name key path and cache name if appropriate.
+//            // nil for section name key path means "no sections".
+//            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+//            aFetchedResultsController.delegate = self
+//            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+//
+//        case .professor:
+//            let a = 1
+//        case .course:
+//            let a = 1
+//        }
         
+        
+        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
-        
+
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "firstName", ascending: true)
-        
+
         fetchRequest.sortDescriptors = [sortDescriptor]
-        
+
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         aFetchedResultsController.delegate = self
-        _fetchedResultsController = aFetchedResultsController
+        _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
         
         do {
             try _fetchedResultsController!.performFetch()
@@ -131,7 +167,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return _fetchedResultsController!
     }
     
-    var _fetchedResultsController: NSFetchedResultsController<Student>? = nil
+    var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>? = nil
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -155,9 +191,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! Student)
+                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! NSManagedObject)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! Student)
+                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! NSManagedObject)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
             default:
                 return

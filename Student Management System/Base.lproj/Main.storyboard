@@ -195,7 +195,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IqR-GN-g6W" customClass="TabBarViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hjB-KG-yoW">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="83l-ab-968">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="83l-ab-968">
                             <connections>
                                 <action selector="insertNewRow:" destination="IqR-GN-g6W" id="JNY-Wx-9Yx"/>
                             </connections>
