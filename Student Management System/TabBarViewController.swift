@@ -11,9 +11,19 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    var mode : DataModel.ObjectType {
+        get {
+            return (self.selectedViewController as? MasterViewController)?.mode ?? .student
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem
+        let editButton = editButtonItem
+        editButton.action = #selector(switchEditMode(_:))
+        editButton.target = self
+        
+        navigationItem.leftBarButtonItem = editButton
  
         
         let studentItem = self.tabBar.items?[0]
@@ -33,6 +43,26 @@ class TabBarViewController: UITabBarController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
         self.present(newViewController, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func switchEditMode(_ sender: Any) {
+        var buttonTitle = "Edit"
+        var setEditting = false
+        if navigationItem.leftBarButtonItem?.title == "Edit" {
+            buttonTitle = "Done"
+            setEditting = true
+        }
+        
+        navigationItem.leftBarButtonItem?.title = buttonTitle
+        self.selectedViewController?.isEditing = setEditting
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        navigationItem.leftBarButtonItem?.title = "Edit"
+        for view in self.viewControllers ?? [] {
+            (view as? MasterViewController)?.isEditing = false
+        }
     }
     
 
