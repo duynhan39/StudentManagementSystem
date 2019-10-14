@@ -10,6 +10,8 @@ import UIKit
 
 class AddObjectViewController: UIViewController {
     
+    var mode = DataModel.ObjectType.student
+    
     @IBOutlet weak var infoQueryView: NewObjectView!
     
     override func viewDidLoad() {

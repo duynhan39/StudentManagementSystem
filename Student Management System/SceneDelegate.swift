@@ -61,18 +61,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         splitViewController.delegate = self
         
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
-//        masterNavigationController.navigationItem.leftBarButtonItem = masterNavigationController.editButtonItem
         
         let tabBarController = masterNavigationController.topViewController as! TabBarViewController
         
         var masterControllers : [MasterViewController?] = []
         
         var count = 0
-        let modes = DataModel.ObjectType.all
         for viewController in tabBarController.viewControllers! {
             if viewController.title == "Master" {
-                (viewController as! MasterViewController).mode = modes[count]
-                count += 1
                 masterControllers += [viewController as? MasterViewController]
             }
         }

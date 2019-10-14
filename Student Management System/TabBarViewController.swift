@@ -11,42 +11,48 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+//    let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(switchEditMode(_:)))
+    
     var mode : DataModel.ObjectType {
-        get {
-            return (self.selectedViewController as? MasterViewController)?.mode ?? .student
-        }
+        return (self.selectedViewController as? MasterViewController)?.mode ?? .student
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpBarButtonItems()
+        
+        let tabBarTitles = ["Students", "Professor", "Courses"]
+        let tabBarImages = ["person.fill", "person.crop.square", "book"]
+        
+        for i in 0..<3 {
+            let barItem = self.tabBar.items?[i]
+            barItem?.title = tabBarTitles[i]
+            barItem?.image = UIImage(systemName: tabBarImages[i])
+            (self.viewControllers?[i] as? MasterViewController)?.mode = DataModel.ObjectType.all[i]
+        }
+    }
+    
+    private func setUpBarButtonItems() {
         let editButton = editButtonItem
-        editButton.action = #selector(switchEditMode(_:))
-        editButton.target = self
-        
+        editButtonItem.action = #selector(switchEditMode(_:))
+        editButtonItem.target = self
         navigationItem.leftBarButtonItem = editButton
- 
         
-        let studentItem = self.tabBar.items?[0]
-        studentItem?.title = "Students"
-        studentItem?.image = UIImage(systemName: "person.fill")
-        
-        let profItem = self.tabBar.items?[1]
-        profItem?.title = "Professors"
-        profItem?.image = UIImage(systemName: "person.crop.square")
-        
-        let courseItem = self.tabBar.items?[2]
-        courseItem?.title = "Courses"
-        courseItem?.image = UIImage(systemName: "book")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewRow(_:)))
+        navigationItem.rightBarButtonItem = addButton
     }
     
-    @IBAction func insertNewRow(_ sender: Any) {
+    @objc private func insertNewRow(_ sender: Any) {
+        turnOffEditMode()
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
-        self.present(newViewController, animated: true, completion: nil)
+        let newAddObjectController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
+        newAddObjectController.mode = self.mode
+        
+        self.present(newAddObjectController, animated: true, completion: nil)
     }
     
-    @objc
-    private func switchEditMode(_ sender: Any) {
+    @objc private func switchEditMode(_ sender: Any) {
         var buttonTitle = "Edit"
         var setEditting = false
         if navigationItem.leftBarButtonItem?.title == "Edit" {
@@ -59,6 +65,10 @@ class TabBarViewController: UITabBarController {
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        turnOffEditMode()
+    }
+    
+    private func turnOffEditMode() {
         navigationItem.leftBarButtonItem?.title = "Edit"
         for view in self.viewControllers ?? [] {
             (view as? MasterViewController)?.isEditing = false
