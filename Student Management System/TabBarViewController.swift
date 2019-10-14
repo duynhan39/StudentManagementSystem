@@ -7,27 +7,17 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
 class TabBarViewController: UITabBarController {
     
-    var managedObjectContext: NSManagedObjectContext? = nil {
-        didSet {
-            studentTab.managedObjectContext = managedObjectContext
-        }
-    }
     
     var studentTab = MasterViewController()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(self.tabBarController?.viewControllers?.count)
-
-        studentTab = self.tabBarController?.viewControllers?[0] as! MasterViewController
-        
-        studentTab.managedObjectContext = managedObjectContext
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
 

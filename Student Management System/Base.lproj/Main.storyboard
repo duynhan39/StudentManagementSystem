@@ -198,13 +198,18 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IqR-GN-g6W" customClass="TabBarViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="hjB-KG-yoW"/>
+                    <navigationItem key="navigationItem" id="hjB-KG-yoW">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="83l-ab-968"/>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="V2f-Ge-b00">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="7bK-jq-Zjz" kind="relationship" relationship="viewControllers" id="pwl-hI-17l"/>
+                        <segue destination="7bK-jq-Zjz" kind="relationship" relationship="viewControllers" id="Ey6-3F-QLs"/>
+                        <segue destination="7bK-jq-Zjz" kind="relationship" relationship="viewControllers" id="TIF-11-sST"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQ6-jl-hxQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -214,5 +219,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
+        <segue reference="Ey6-3F-QLs"/>
     </inferredMetricsTieBreakers>
 </document>
