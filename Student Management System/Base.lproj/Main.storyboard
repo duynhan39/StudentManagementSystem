@@ -109,7 +109,7 @@
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="inN-bI-QTt">
                             <connections>
-                                <segue destination="5Yt-ei-UlL" kind="show" identifier="addNewObject" id="tTp-rO-BBv"/>
+                                <action selector="addNewObject:" destination="7bK-jq-Zjz" id="O8L-Zf-iMp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -121,21 +121,43 @@
         <!--Add Object View Controller-->
         <scene sceneID="Gs3-ZV-wpe">
             <objects>
-                <viewController id="5Yt-ei-UlL" customClass="AddObjectViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddNewObjectViewController" id="5Yt-ei-UlL" customClass="AddObjectViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5mk-8K-4ac">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFP-zb-LVq" customClass="NewObjectView" customModule="Student_Management_System" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="803"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJe-OP-wzH">
+                                <rect key="frame" x="359" y="52" width="40" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveInfo:" destination="5Yt-ei-UlL" eventType="touchUpInside" id="rFe-7g-ott"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8d-qY-ObO">
+                                <rect key="frame" x="15" y="52" width="53" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelAction:" destination="5Yt-ei-UlL" eventType="touchUpInside" id="zNR-kX-yhQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="x8d-qY-ObO" firstAttribute="top" secondItem="iLw-d8-ud5" secondAttribute="top" constant="8" id="BGb-fo-qQA"/>
+                            <constraint firstItem="qFP-zb-LVq" firstAttribute="top" secondItem="YJe-OP-wzH" secondAttribute="bottom" constant="8" symbolic="YES" id="HZi-D5-oHp"/>
                             <constraint firstItem="qFP-zb-LVq" firstAttribute="leading" secondItem="iLw-d8-ud5" secondAttribute="leading" id="RTV-Jw-SrU"/>
                             <constraint firstItem="iLw-d8-ud5" firstAttribute="trailing" secondItem="qFP-zb-LVq" secondAttribute="trailing" id="dMP-rT-GA9"/>
-                            <constraint firstItem="qFP-zb-LVq" firstAttribute="top" secondItem="iLw-d8-ud5" secondAttribute="top" id="eCl-rT-w13"/>
+                            <constraint firstItem="YJe-OP-wzH" firstAttribute="top" secondItem="iLw-d8-ud5" secondAttribute="top" constant="8" id="h8u-Vy-Rnj"/>
                             <constraint firstItem="qFP-zb-LVq" firstAttribute="bottom" secondItem="iLw-d8-ud5" secondAttribute="bottom" constant="34" id="kJv-ev-sUe"/>
+                            <constraint firstItem="iLw-d8-ud5" firstAttribute="trailing" secondItem="YJe-OP-wzH" secondAttribute="trailing" constant="15" id="wHZ-pZ-Ogw"/>
+                            <constraint firstItem="x8d-qY-ObO" firstAttribute="leading" secondItem="iLw-d8-ud5" secondAttribute="leading" constant="15" id="wN5-LY-Vy8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iLw-d8-ud5"/>
                     </view>
@@ -172,6 +194,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
+        <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
 </document>

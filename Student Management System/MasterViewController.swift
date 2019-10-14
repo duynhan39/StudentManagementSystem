@@ -19,10 +19,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = editButtonItem
-
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-//        navigationItem.rightBarButtonItem = addButton
-        
+        //        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        //        navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -33,27 +31,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
-
-//    @objc
-//    func insertNewObject(_ sender: Any) {
-//
-//        let context = self.fetchedResultsController.managedObjectContext
-//        let newStudent = Student(context: context)
-//
-//        // If appropriate, configure the new managed object.
-//        newStudent.firstName = "Nhan"
-//
-//        // Save the context.
-//        do {
-//            try context.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            let nserror = error as NSError
-//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//        }
-//    }
-
+    
+    
+    @IBAction func addNewObject(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
+        self.present(newViewController, animated: true, completion: nil)
+    }
+    
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

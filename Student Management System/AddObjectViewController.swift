@@ -16,11 +16,15 @@ class AddObjectViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
     @IBAction func saveInfo(_ sender: Any) {
         createNewObject()
         goBackToPreviousView()
     }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        goBackToPreviousView()
+    }
+    
     
     // MARK: Helper Function
     private func createNewObject() {
@@ -51,6 +55,7 @@ class AddObjectViewController: UIViewController {
     
     private func goBackToPreviousView() {
         navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     

@@ -52,11 +52,17 @@ class NewObjectView: UIView, UITableViewDataSource {
     
     
     // MARK: - Draw
+    
+    override func layoutIfNeeded() {
+        setNeedsDisplay()
+        setNeedsLayout()
+    }
+    
     override func draw(_ rect: CGRect) {
         objectType = DataModel.ObjectType.student
         
         let displayGap : CGFloat = 15
-        let pictureEdge = self.frame.width/3
+        let pictureEdge = min(self.frame.width/3, self.frame.height/5)
         let pictureFrame = CGRect(x: self.frame.midX - pictureEdge*0.5,
                                   y: displayGap,
                                   width: pictureEdge,
