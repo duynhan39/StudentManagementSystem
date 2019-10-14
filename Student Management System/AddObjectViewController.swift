@@ -18,13 +18,17 @@ class AddObjectViewController: UIViewController {
     
     
     @IBAction func saveInfo(_ sender: Any) {
+        createNewObject()
+        goBackToPreviousView()
+    }
+    
+    // MARK: Helper Function
+    private func createNewObject() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         
         let context = appDelegate.persistentContainer.viewContext
-        
-        //        fetchedResultsController.managedObjectContext
         
         let newStudent = Student(context: context)
         let inputtedData = infoQueryView.getInputedData()
@@ -33,9 +37,6 @@ class AddObjectViewController: UIViewController {
         for key in inputtedData.keys {
             newStudent[key] = inputtedData[key]
         }
-        
-        // If appropriate, configure the new managed object.
-        //        newStudent.firstName = "Naa"
         
         // Save the context.
         do {
@@ -46,19 +47,22 @@ class AddObjectViewController: UIViewController {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        
-        
     }
     
-    /*
-     // MARK: - Navigation
+    private func goBackToPreviousView() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    // MARK: - Navigation
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destination.
+//        // Pass the selected object to the new view controller.
+//
+//
+//    }
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
