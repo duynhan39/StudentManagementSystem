@@ -114,46 +114,59 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             return _fetchedResultsController!
         }
         
-//        switch mode {
-//        case .student:
-//            let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
-//
-//            // Set the batch size to a suitable number.
-//            fetchRequest.fetchBatchSize = 20
-//
-//            // Edit the sort key as appropriate.
-//            let sortDescriptor = NSSortDescriptor(key: "description", ascending: true)
-//
-//            fetchRequest.sortDescriptors = [sortDescriptor]
-//
-//            // Edit the section name key path and cache name if appropriate.
-//            // nil for section name key path means "no sections".
-//            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-//            aFetchedResultsController.delegate = self
-//            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
-//
-//        case .professor:
-//            let a = 1
-//        case .course:
-//            let a = 1
-//        }
-        
-        
-        let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
+        // MARK: Choosing the entity
+        switch mode {
+        case .student:
+            let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
 
-        // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
+            // Set the batch size to a suitable number.
+            fetchRequest.fetchBatchSize = 20
 
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "firstName", ascending: true)
+            // Edit the sort key as appropriate.
+            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
 
-        fetchRequest.sortDescriptors = [sortDescriptor]
+            fetchRequest.sortDescriptors = [sortDescriptor]
 
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        aFetchedResultsController.delegate = self
-        _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+            // Edit the section name key path and cache name if appropriate.
+            // nil for section name key path means "no sections".
+            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+            aFetchedResultsController.delegate = self
+            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+
+        case .professor:
+            let fetchRequest: NSFetchRequest<Professor> = Professor.fetchRequest()
+
+            // Set the batch size to a suitable number.
+            fetchRequest.fetchBatchSize = 20
+
+            // Edit the sort key as appropriate.
+            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
+
+            fetchRequest.sortDescriptors = [sortDescriptor]
+
+            // Edit the section name key path and cache name if appropriate.
+            // nil for section name key path means "no sections".
+            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+            aFetchedResultsController.delegate = self
+            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+
+        case .course:
+            let fetchRequest: NSFetchRequest<Course> = Course.fetchRequest()
+
+            // Set the batch size to a suitable number.
+            fetchRequest.fetchBatchSize = 20
+
+            // Edit the sort key as appropriate.
+            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
+
+            fetchRequest.sortDescriptors = [sortDescriptor]
+
+            // Edit the section name key path and cache name if appropriate.
+            // nil for section name key path means "no sections".
+            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+            aFetchedResultsController.delegate = self
+            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+        }
         
         do {
             try _fetchedResultsController!.performFetch()

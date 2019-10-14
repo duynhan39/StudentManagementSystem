@@ -38,4 +38,97 @@ class DataModel {
 //    }
 //}
 
+extension Student {
+    subscript(key:String) -> Any? {
+        get {return nil}
+        set(newValue) {
+            switch key {
+            case "firstName":
+                self.firstName = newValue as? String
+            case "lastName":
+                self.lastName = newValue as? String
+            case "email":
+                self.email = newValue as? String
+            case "id":
+                self.id = newValue as? String
+            case "phone":
+                self.phone = newValue as? String
+            case "campusAddress":
+                self.campusAddress = newValue as? String
+            case "photo":
+                self.photo = newValue as? Data
+            default:
+                print("Attribute does not exits")
+                return
+            }
+        }
+    }
+    
+    
+    
+    override public var description: String {
+        return "\(self.firstName ?? "") \(self.lastName ?? "")"
+    }
+}
+
+extension Professor {
+    subscript(key:String) -> Any? {
+        get {return nil}
+        set(newValue) {
+            switch key {
+            case "firstName":
+                self.firstName = newValue as? String
+            case "lastName":
+                self.lastName = newValue as? String
+            case "email":
+                self.email = newValue as? String
+            case "officeAddress":
+                self.officeAddress = newValue as? String
+            case "homeAddress":
+                self.homeAddress = newValue as? String
+            case "photo":
+                self.photo = newValue as? Data
+            default:
+                print("Attribute does not exits")
+                return
+            }
+        }
+    }
+    
+    override public var description: String {
+        return "\(self.firstName ?? "") \(self.lastName ?? "")"
+    }
+}
+
+extension Course {
+    subscript(key:String) -> Any? {
+        get {return nil}
+        set(newValue) {
+            switch key {
+            case "departmentCode":
+                self.departmentCode = newValue as? String
+//            case "lastName":
+//                self.lastName = newValue as? String
+//            case "email":
+//                self.email = newValue as? String
+//            case "id":
+//                self.id = newValue as? String
+//            case "phone":
+//                self.phone = newValue as? String
+//            case "campusAddress":
+//                self.campusAddress = newValue as? String
+//            case "photo":
+//                self.photo = newValue as? Data
+            default:
+                print("Attribute does not exits")
+                return
+            }
+        }
+    }
+    
+    override public var description: String {
+        return "\(self.departmentCode ?? "")\(self.number ?? "") - \(self.name ?? "")"
+    }
+}
+
 
