@@ -11,13 +11,22 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
-    
-    var studentTab = MasterViewController()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        let studentItem = self.tabBar.items?[0]
+        studentItem?.title = "Students"
+        studentItem?.image = UIImage(systemName: "person.fill")
+        
+        let profItem = self.tabBar.items?[1]
+        profItem?.title = "Professors"
+        profItem?.image = UIImage(systemName: "person.crop.square")
+        
+        let courseItem = self.tabBar.items?[2]
+        courseItem?.title = "Courses"
+        courseItem?.image = UIImage(systemName: "book")
     }
     
 
