@@ -18,13 +18,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let window = window else { return }
-        guard let splitViewController = window.rootViewController as? UISplitViewController else { return }
-        guard let navigationController = splitViewController.viewControllers.last as? UINavigationController else { return }
-        navigationController.topViewController?.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
-        navigationController.topViewController?.navigationItem.leftItemsSupplementBackButton = true
-        splitViewController.delegate = self
+        
+        
+        let tabBarViewController = self.window!.rootViewController as! UITabBarController
+        print(tabBarViewController.viewControllers?.count)
+        
+        var splitViewController:UISplitViewController? = nil
+        for viewController in tabBarViewController.viewControllers! {
+        if viewController.title == "Master" {
+            splitViewController = viewController as? UISplitViewController
+        }
+        }
 
-        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let navigationController = splitViewController!.viewControllers[splitViewController!.viewControllers.count-1] as! UINavigationController
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
+        splitViewController!.delegate = self
+        
+//        guard let splitViewController = window.rootViewController as? UISplitViewController else { return }
+//        guard let navigationController = splitViewController!.viewControllers.last as? UINavigationController else { return }
+        navigationController.topViewController?.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
+        navigationController.topViewController?.navigationItem.leftItemsSupplementBackButton = true
+//        splitViewController.delegate = self
+
+        let masterNavigationController = splitViewController!.viewControllers[0] as! UINavigationController
         let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     }
