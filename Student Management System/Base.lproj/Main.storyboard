@@ -107,7 +107,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="inN-bI-QTt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="inN-bI-QTt">
                             <connections>
                                 <action selector="addNewObject:" destination="7bK-jq-Zjz" id="O8L-Zf-iMp"/>
                             </connections>

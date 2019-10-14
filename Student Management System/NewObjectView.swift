@@ -53,9 +53,14 @@ class NewObjectView: UIView, UITableViewDataSource {
     
     // MARK: - Draw
     
-    override func layoutIfNeeded() {
-        setNeedsDisplay()
+//    override func layoutIfNeeded() {
+//        setNeedsDisplay()
+//        setNeedsLayout()
+//    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsLayout()
+        setNeedsDisplay()
     }
     
     override func draw(_ rect: CGRect) {
