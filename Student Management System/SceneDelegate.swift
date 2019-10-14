@@ -58,9 +58,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         navigationController.topViewController?.navigationItem.leftItemsSupplementBackButton = true
         splitViewController.delegate = self
         
+        
+        
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+//        masterNavigationController.navigationItem.leftBarButtonItem = masterNavigationController.editButtonItem
+        
         let tabBarController = masterNavigationController.topViewController as! TabBarViewController
-    
+        
         var masterControllers : [MasterViewController?] = []
         
         for viewController in tabBarController.viewControllers! {

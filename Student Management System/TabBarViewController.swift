@@ -11,10 +11,10 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
+ 
         
         let studentItem = self.tabBar.items?[0]
         studentItem?.title = "Students"
@@ -27,6 +27,12 @@ class TabBarViewController: UITabBarController {
         let courseItem = self.tabBar.items?[2]
         courseItem?.title = "Courses"
         courseItem?.image = UIImage(systemName: "book")
+    }
+    
+    @IBAction func insertNewRow(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
+        self.present(newViewController, animated: true, completion: nil)
     }
     
 

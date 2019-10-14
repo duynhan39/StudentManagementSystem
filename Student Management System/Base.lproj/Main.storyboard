@@ -108,16 +108,12 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="kyC-0d-BHk"/>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="inN-bI-QTt">
-                            <connections>
-                                <action selector="addNewObject:" destination="7bK-jq-Zjz" id="O8L-Zf-iMp"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="inN-bI-QTt"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1480" y="-630"/>
+            <point key="canvasLocation" x="1780" y="-681"/>
         </scene>
         <!--Add Object View Controller-->
         <scene sceneID="Gs3-ZV-wpe">
@@ -175,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xt-pI-EYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2368.1159420289855" y="-630.13392857142856"/>
+            <point key="canvasLocation" x="2519" y="-681"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -199,7 +195,11 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IqR-GN-g6W" customClass="TabBarViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hjB-KG-yoW">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="83l-ab-968"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="83l-ab-968">
+                            <connections>
+                                <action selector="insertNewRow:" destination="IqR-GN-g6W" id="JNY-Wx-9Yx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="V2f-Ge-b00">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -214,11 +214,11 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQ6-jl-hxQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708.69565217391312" y="-630.13392857142856"/>
+            <point key="canvasLocation" x="758" y="-851"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
-        <segue reference="Ey6-3F-QLs"/>
+        <segue reference="TIF-11-sST"/>
     </inferredMetricsTieBreakers>
 </document>

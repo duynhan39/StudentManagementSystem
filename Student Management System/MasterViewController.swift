@@ -13,7 +13,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +32,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     
-    @IBAction func addNewObject(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
-        self.present(newViewController, animated: true, completion: nil)
-    }
+//    @IBAction func addNewObject(_ sender: Any) {
+//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let newViewController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
+//        self.present(newViewController, animated: true, completion: nil)
+//    }
     
     // MARK: - Segues
 
