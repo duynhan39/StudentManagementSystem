@@ -115,58 +115,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         // MARK: Choosing the entity
+        
         switch mode {
         case .student:
-            let fetchRequest: NSFetchRequest<Student> = Student.fetchRequest()
-
-            // Set the batch size to a suitable number.
-            fetchRequest.fetchBatchSize = 20
-
-            // Edit the sort key as appropriate.
-            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
-
-            fetchRequest.sortDescriptors = [sortDescriptor]
-
-            // Edit the section name key path and cache name if appropriate.
-            // nil for section name key path means "no sections".
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-            aFetchedResultsController.delegate = self
-            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
-
+            fetchData(model: Student())
         case .professor:
-            let fetchRequest: NSFetchRequest<Professor> = Professor.fetchRequest()
-
-            // Set the batch size to a suitable number.
-            fetchRequest.fetchBatchSize = 20
-
-            // Edit the sort key as appropriate.
-            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
-
-            fetchRequest.sortDescriptors = [sortDescriptor]
-
-            // Edit the section name key path and cache name if appropriate.
-            // nil for section name key path means "no sections".
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-            aFetchedResultsController.delegate = self
-            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
-
+            fetchData(model: Professor())
         case .course:
-            let fetchRequest: NSFetchRequest<Course> = Course.fetchRequest()
-
-            // Set the batch size to a suitable number.
-            fetchRequest.fetchBatchSize = 20
-
-            // Edit the sort key as appropriate.
-            let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
-
-            fetchRequest.sortDescriptors = [sortDescriptor]
-
-            // Edit the section name key path and cache name if appropriate.
-            // nil for section name key path means "no sections".
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-            aFetchedResultsController.delegate = self
-            _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
+            fetchData(model: Course())
         }
+        
         
         do {
             try _fetchedResultsController!.performFetch()
@@ -178,6 +136,24 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         return _fetchedResultsController!
+    }
+    
+    private func fetchData<T: NSManagedObject>(model: T) {
+        let fetchRequest = T.fetchRequest() as! NSFetchRequest<T>
+
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "descriptionID", ascending: true)
+
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
     }
     
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>? = nil
