@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="709" y="129"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="2LP-GI-qBG">
             <objects>
-                <tabBarController id="qfs-pr-paP" sceneMemberID="viewController">
+                <tabBarController id="qfs-pr-paP" customClass="TabBarViewController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OYX-Vw-EJ0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -67,11 +67,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="iL4-IN-bK4"/>
+                        <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="j14-iL-Wb4"/>
+                        <segue destination="H1p-Uh-vWS" kind="relationship" relationship="viewControllers" id="j8Y-0f-UEl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lkW-nG-2p7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1874" y="-382"/>
+            <point key="canvasLocation" x="-1845" y="-845"/>
         </scene>
         <!--Master-->
         <scene sceneID="Nki-YV-4Qg">
@@ -213,5 +215,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Tll-UG-LXB"/>
+        <segue reference="j8Y-0f-UEl"/>
     </inferredMetricsTieBreakers>
 </document>

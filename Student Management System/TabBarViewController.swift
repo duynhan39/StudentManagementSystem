@@ -1,0 +1,42 @@
+//
+//  TabBarViewController.swift
+//  Student Management System
+//
+//  Created by Nhan Cao on 10/14/19.
+//  Copyright © 2019 Nhan Cao. All rights reserved.
+//
+
+import UIKit
+
+class TabBarViewController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let studentItem = self.tabBar.items?[0]
+        studentItem?.title = "Students"
+        studentItem?.image = UIImage(systemName: "person.fill")
+        
+        let profItem = self.tabBar.items?[1]
+        profItem?.title = "Professors"
+        profItem?.image = UIImage(systemName: "person.crop.square")
+        
+        let courseItem = self.tabBar.items?[2]
+        courseItem?.title = "Courses"
+        courseItem?.image = UIImage(systemName: "book")
+
+        // Do any additional setup after loading the view.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

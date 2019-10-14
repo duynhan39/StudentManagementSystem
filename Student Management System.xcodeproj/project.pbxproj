@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		540D12262352A587007606D9 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540D12252352A587007606D9 /* DataModel.swift */; };
+		5420FDD42354496C00FF7285 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5420FDD32354496C00FF7285 /* TabBarViewController.swift */; };
+		5420FDD623544E0500FF7285 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5420FDD523544E0500FF7285 /* Entity.swift */; };
 		5442CF6B23450B9D00D438AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6A23450B9D00D438AE /* AppDelegate.swift */; };
 		5442CF6E23450B9D00D438AE /* Student_Management_System.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6C23450B9D00D438AE /* Student_Management_System.xcdatamodeld */; };
 		5442CF7023450B9D00D438AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442CF6F23450B9D00D438AE /* SceneDelegate.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		540D12252352A587007606D9 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		5420FDD32354496C00FF7285 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5420FDD523544E0500FF7285 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		5442CF6723450B9D00D438AE /* Student Management System.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Student Management System.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5442CF6A23450B9D00D438AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5442CF6D23450B9D00D438AE /* Student_Management_System.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Student_Management_System.xcdatamodel; sourceTree = "<group>"; };
@@ -68,15 +72,17 @@
 		5442CF6923450B9D00D438AE /* Student Management System */ = {
 			isa = PBXGroup;
 			children = (
+				5442CF7523450B9D00D438AE /* Main.storyboard */,
 				5442CF6A23450B9D00D438AE /* AppDelegate.swift */,
 				5442CF6F23450B9D00D438AE /* SceneDelegate.swift */,
+				5420FDD32354496C00FF7285 /* TabBarViewController.swift */,
 				5442CF7123450B9D00D438AE /* MasterViewController.swift */,
-				54B4AF402353CB74003CD70B /* NewObjectView.swift */,
-				54B4AF442353D721003CD70B /* AddObjectViewController.swift */,
 				5442CF7323450B9D00D438AE /* DetailViewController.swift */,
-				5442CF7523450B9D00D438AE /* Main.storyboard */,
-				540D12252352A587007606D9 /* DataModel.swift */,
+				54B4AF442353D721003CD70B /* AddObjectViewController.swift */,
+				54B4AF402353CB74003CD70B /* NewObjectView.swift */,
 				54B4AF3E2352D8D1003CD70B /* NewInfoCell.swift */,
+				540D12252352A587007606D9 /* DataModel.swift */,
+				5420FDD523544E0500FF7285 /* Entity.swift */,
 				5442CF7823450B9D00D438AE /* Assets.xcassets */,
 				5442CF7A23450B9D00D438AE /* LaunchScreen.storyboard */,
 				5442CF7D23450B9E00D438AE /* Info.plist */,
@@ -163,7 +169,9 @@
 				5442CF7423450B9D00D438AE /* DetailViewController.swift in Sources */,
 				54B4AF452353D721003CD70B /* AddObjectViewController.swift in Sources */,
 				54B4AF412353CB74003CD70B /* NewObjectView.swift in Sources */,
+				5420FDD623544E0500FF7285 /* Entity.swift in Sources */,
 				5442CF6E23450B9D00D438AE /* Student_Management_System.xcdatamodeld in Sources */,
+				5420FDD42354496C00FF7285 /* TabBarViewController.swift in Sources */,
 				5442CF7023450B9D00D438AE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
