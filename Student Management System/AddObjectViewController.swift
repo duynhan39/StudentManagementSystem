@@ -10,12 +10,18 @@ import UIKit
 
 class AddObjectViewController: UIViewController {
     
-    var mode = DataModel.ObjectType.student
-    
     @IBOutlet weak var infoQueryView: NewObjectView!
+    
+    var mode = DataModel.ObjectType.student
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        infoQueryView.objectType = self.mode
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     
     @IBAction func saveInfo(_ sender: Any) {
@@ -44,7 +50,6 @@ class AddObjectViewController: UIViewController {
         }
         
         newObject.descriptionID = newObject.description
-        
         
         // Save the context.
         do {

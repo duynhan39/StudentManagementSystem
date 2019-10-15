@@ -14,15 +14,21 @@ class NewObjectView: UIView, UITableViewDataSource {
     // MARK: - Variables
     private var attributeTable = UITableView()
     private var profileImageView = UIImageView()
+    private var viewLabel = UILabel()
     
-    private var attributes = [String]()
+    private var attributes : [String] {
+        get {
+            return DataModel.AttributeNames[self.objectType.rawValue] ?? []
+        }
+    }
     
-    private var objectType = DataModel.ObjectType.student {
+    var objectType = DataModel.ObjectType.student {
         didSet {
-            attributes = DataModel.AttributeNames[self.objectType.rawValue] ?? []
-            
             setNeedsLayout()
             setNeedsDisplay()
+            
+            viewLabel.text = "Create new \(self.objectType.description.lowercased())"
+            
         }
     }
     
@@ -38,25 +44,23 @@ class NewObjectView: UIView, UITableViewDataSource {
     }
     
     private func commonInit() {
-        objectType = DataModel.ObjectType.student
         
         addSubview(profileImageView)
-        
         addSubview(attributeTable)
+        addSubview(viewLabel)
+        
         attributeTable.dataSource = self
         attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
-        attributeTable.bounces = false
+//        attributeTable.bounces = false
         
         attributeTable.allowsSelection =  false
+        
+        viewLabel.text = "Create new student"
+        viewLabel.textAlignment = .center
     }
     
     
     // MARK: - Draw
-    
-//    override func layoutIfNeeded() {
-//        setNeedsDisplay()
-//        setNeedsLayout()
-//    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsLayout()
@@ -64,12 +68,30 @@ class NewObjectView: UIView, UITableViewDataSource {
     }
     
     override func draw(_ rect: CGRect) {
-        objectType = DataModel.ObjectType.student
+        
+        clearsContextBeforeDrawing = true
+        
+//        for i in 0...10 { print("++-------") }
+//        print("\(objectType)")
+//        for i in 0...10 { print("++-------") }
         
         let displayGap : CGFloat = 15
+        
+        // MARK: Name label
+        
+        let labelFontSize : CGFloat = 20
+        let labelFrame = CGRect(x: 0, y: displayGap, width: self.frame.width, height: labelFontSize)
+        viewLabel.frame = labelFrame
+        
+        viewLabel.font = UIFont.boldSystemFont(ofSize: labelFontSize)
+        
+//        viewLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: displayGap).isActive = true
+//        viewLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // MARK: Profile picture
         let pictureEdge = min(self.frame.width/3, self.frame.height/5)
-        let pictureFrame = CGRect(x: self.frame.midX - pictureEdge*0.5,
-                                  y: displayGap,
+        let pictureFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
+                                  y: displayGap + viewLabel.frame.maxY,
                                   width: pictureEdge,
                                   height: pictureEdge)
         profileImageView.frame = pictureFrame
@@ -78,7 +100,7 @@ class NewObjectView: UIView, UITableViewDataSource {
         profileImageView.image = UIImage(systemName: "person.circle.fill")
         profileImageView.tintColor = UIColor.black
         
-        
+        // MARK: Attribute table
         let tableY = pictureFrame.maxY + displayGap
         let tableHeight = min(self.frame.height - tableY, attributeTable.contentSize.height*2)
         
