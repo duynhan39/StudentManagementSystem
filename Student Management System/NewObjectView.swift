@@ -51,7 +51,7 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         attributeTable.dataSource = self
         attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
-//        attributeTable.bounces = false
+        //        attributeTable.bounces = false
         
         attributeTable.allowsSelection =  false
         
@@ -73,9 +73,9 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         clearsContextBeforeDrawing = true
         
-//        for i in 0...10 { print("++-------") }
-//        print("\(objectType)")
-//        for i in 0...10 { print("++-------") }
+        //        for i in 0...10 { print("++-------") }
+        //        print("\(objectType)")
+        //        for i in 0...10 { print("++-------") }
         
         let displayGap : CGFloat = 15
         
@@ -87,8 +87,8 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         viewLabel.font = UIFont.boldSystemFont(ofSize: labelFontSize)
         
-//        viewLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: displayGap).isActive = true
-//        viewLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        //        viewLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: displayGap).isActive = true
+        //        viewLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
         // MARK: Profile picture
         let pictureEdge = min(self.frame.width/3, self.frame.height/5)
@@ -145,10 +145,9 @@ class NewObjectView: UIView, UITableViewDataSource {
         for i in 0..<attributes.count {
             let attName = attributes[i]
             let indexPath = IndexPath(row: i, section: 0)
-            let cell = attributeTable.cellForRow(at: indexPath) as! NewInfoCell
-            let inputtedText = cell.getInputtedContent()
-            
-            inputtedData[attributeIds[attName] ?? "None"] = inputtedText
+            if let cell = attributeTable.cellForRow(at: indexPath) as? NewInfoCell {
+                inputtedData[attributeIds[attName] ?? "None"] = cell.getInputtedContent()
+            }
         }
         
         // Retrieve Image
@@ -175,7 +174,7 @@ extension DataModel {
         "Student" :     ["First name" : "firstName",
                          "Last name" : "lastName",
                          "Email" : "email",
-                         "ID" : "id",
+                         "Student ID" : "id",
                          "Phone number" : "phone",
                          "Campus address" : "campusAddress"],
         
@@ -187,17 +186,18 @@ extension DataModel {
         
         "Course" :      ["Department Code" : "departmentCode",
                          "Course number" : "number",
-                         "Name" : "name",
+                         "Course name" : "name",
                          "Meeting days" : "meetingDay",
-                         "Time" : "time"]
+                         "Time" : "time",
+                         "Location" : "location"]
     ]
     
     static let AttributeNames = [
-        "Student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
+        "Student" : ["First name", "Last name", "Email", "Student ID", "Phone number", "Campus address"],
         
         "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"],
         
-        "Course" : ["Department Code", "Course number", "Name", "Meeting days", "Time"]
+        "Course" : ["Department Code", "Course number", "Course name", "Meeting days", "Time", "Location"]
     ]
 }
 

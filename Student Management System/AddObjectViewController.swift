@@ -18,6 +18,8 @@ class AddObjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         infoQueryView.objectType = self.mode
+        
+        self.isModalInPresentation = true
     }
     
     override func viewDidAppear(_ animated: Bool) {

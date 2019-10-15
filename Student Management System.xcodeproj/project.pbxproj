@@ -80,10 +80,10 @@
 				54B4AF402353CB74003CD70B /* NewObjectView.swift */,
 				54B4AF3E2352D8D1003CD70B /* NewInfoCell.swift */,
 				540D12252352A587007606D9 /* DataModel.swift */,
+				5442CF6C23450B9D00D438AE /* Student_Management_System.xcdatamodeld */,
 				5442CF7823450B9D00D438AE /* Assets.xcassets */,
 				5442CF7A23450B9D00D438AE /* LaunchScreen.storyboard */,
 				5442CF7D23450B9E00D438AE /* Info.plist */,
-				5442CF6C23450B9D00D438AE /* Student_Management_System.xcdatamodeld */,
 			);
 			path = "Student Management System";
 			sourceTree = "<group>";

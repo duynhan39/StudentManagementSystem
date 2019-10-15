@@ -108,24 +108,24 @@ extension Course {
             switch key {
             case "departmentCode":
                 self.departmentCode = newValue as? String
-//            case "lastName":
-//                self.lastName = newValue as? String
-//            case "email":
-//                self.email = newValue as? String
-//            case "id":
-//                self.id = newValue as? String
-//            case "phone":
-//                self.phone = newValue as? String
-//            case "campusAddress":
-//                self.campusAddress = newValue as? String
-//            case "photo":
-//                self.photo = newValue as? Data
+            case "number":
+                self.number = newValue as? String
+            case "name":
+                self.name = newValue as? String
+            case "meetingDay":
+                self.meetingDay = newValue as? String
+            case "time":
+                self.time = newValue as? String
+            case "location":
+                self.location = newValue as? String
             default:
                 print("Attribute does not exits")
                 return
             }
         }
     }
+    
+    
     
     override public var description: String {
         return "\(self.departmentCode ?? "")\(self.number ?? "") - \(self.name ?? "")"

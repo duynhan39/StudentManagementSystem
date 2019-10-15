@@ -38,8 +38,28 @@ class NewInfoCell: UITableViewCell {
     
     var placeHolderText = "" {
         didSet {
+            placeHolderText = convertPlaceHolderString(from: placeHolderText)
             attributeInputTextField.placeholder = placeHolderText
         }
+    }
+    
+    private func convertPlaceHolderString(from text: String) -> String {
+        var actualValue = ""
+        switch text {
+        case "Time":
+            actualValue = "8:00-8:50"
+        case "Meeting days":
+            actualValue = "M T W Th F Sa Su"
+        case "Email":
+            actualValue = "example@email.com"
+        case "Phone number":
+            actualValue = "XXX-XXX-XXXX"
+        case "Student ID":
+            actualValue = "7-digit number"
+        default:
+            actualValue = text
+        }
+        return actualValue
     }
     
     
@@ -132,9 +152,6 @@ extension UIView {
             let insets = self.safeAreaInsets
             topInset = insets.top
             bottomInset = insets.bottom
-            
-            print("Top: \(topInset)")
-            print("bottom: \(bottomInset)")
         }
         
         translatesAutoresizingMaskIntoConstraints = false
