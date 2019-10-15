@@ -71,6 +71,8 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         clearsContextBeforeDrawing = true
         
+        clearsContextBeforeDrawing = true
+        
 //        for i in 0...10 { print("++-------") }
 //        print("\(objectType)")
 //        for i in 0...10 { print("++-------") }
@@ -102,7 +104,8 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         // MARK: Attribute table
         let tableY = pictureFrame.maxY + displayGap
-        let tableHeight = min(self.frame.height - tableY, attributeTable.contentSize.height*2)
+        let tableHeight = self.frame.height - tableY
+        //min(self.frame.height - tableY, attributeTable.contentSize.height*2)
         
         let tableFrame = CGRect(x: 0,
                                 y: tableY,
@@ -182,13 +185,19 @@ extension DataModel {
                          "Home address" : "homeAddress",
                          "Office address" : "officeAddress"],
         
-        "Course" : ["":""]
+        "Course" :      ["Department Code" : "departmentCode",
+                         "Course number" : "number",
+                         "Name" : "name",
+                         "Meeting days" : "meetingDay",
+                         "Time" : "time"]
     ]
     
     static let AttributeNames = [
         "Student" : ["First name", "Last name", "Email", "ID", "Phone number", "Campus address"],
         
-        "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"]
+        "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"],
+        
+        "Course" : ["Department Code", "Course number", "Name", "Meeting days", "Time"]
     ]
 }
 

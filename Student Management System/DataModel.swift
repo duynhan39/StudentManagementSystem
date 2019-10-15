@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class DataModel {
     
@@ -41,7 +42,7 @@ class DataModel {
 //}
 
 extension Student {
-    subscript(key:String) -> Any? {
+    @objc override subscript(key:String) -> Any? {
         get {return nil}
         set(newValue) {
             switch key {
@@ -66,15 +67,13 @@ extension Student {
         }
     }
     
-    
-    
     override public var description: String {
         return "\(self.firstName ?? "") \(self.lastName ?? "")"
     }
 }
 
 extension Professor {
-    subscript(key:String) -> Any? {
+    @objc override subscript(key:String) -> Any? {
         get {return nil}
         set(newValue) {
             switch key {
@@ -103,7 +102,7 @@ extension Professor {
 }
 
 extension Course {
-    subscript(key:String) -> Any? {
+    @objc override subscript(key:String) -> Any? {
         get {return nil}
         set(newValue) {
             switch key {
@@ -130,6 +129,13 @@ extension Course {
     
     override public var description: String {
         return "\(self.departmentCode ?? "")\(self.number ?? "") - \(self.name ?? "")"
+    }
+}
+
+extension NSManagedObject {
+    @objc subscript(key:String) -> Any? {
+        get {return nil}
+        set {}
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddObjectViewController: UIViewController {
     
@@ -25,7 +26,16 @@ class AddObjectViewController: UIViewController {
     }
     
     @IBAction func saveInfo(_ sender: Any) {
-        createNewObject()
+
+        switch mode {
+        case .student:
+            createNewObject(model: Student())
+        case .professor:
+            createNewObject(model: Professor())
+        case .course:
+            createNewObject(model: Course())
+        }
+        
         goBackToPreviousView()
     }
     
@@ -35,21 +45,21 @@ class AddObjectViewController: UIViewController {
     
     
     // MARK: Helper Function
-    private func createNewObject() {
+    private func createNewObject<T: NSManagedObject>(model: T) {
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        
         let context = appDelegate.persistentContainer.viewContext
-        
-        let newObject = Student(context: context)
+
+        let newObject = T(context: context)
         let inputtedData = infoQueryView.getInputedData()
         
         for key in inputtedData.keys {
             newObject[key] = inputtedData[key]
         }
         
-        newObject.descriptionID = newObject.description
+        newObject["descriptionID"] = newObject.description
         
         // Save the context.
         do {
