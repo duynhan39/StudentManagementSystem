@@ -51,7 +51,7 @@ class NewObjectView: UIView, UITableViewDataSource {
         
         attributeTable.dataSource = self
         attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
-        //        attributeTable.bounces = false
+        attributeTable.bounces = false
         
         attributeTable.allowsSelection =  false
         
@@ -68,47 +68,45 @@ class NewObjectView: UIView, UITableViewDataSource {
     }
     
     override func draw(_ rect: CGRect) {
-        
         clearsContextBeforeDrawing = true
-        
-        clearsContextBeforeDrawing = true
-        
-        //        for i in 0...10 { print("++-------") }
-        //        print("\(objectType)")
-        //        for i in 0...10 { print("++-------") }
+        attributeTable.separatorStyle = .none
         
         let displayGap : CGFloat = 15
+        var currentAvaiY : CGFloat = displayGap
+
         
         // MARK: Name label
         
         let labelFontSize : CGFloat = 20
-        let labelFrame = CGRect(x: 0, y: displayGap, width: self.frame.width, height: labelFontSize)
+        let labelFrame = CGRect(x: 0, y: currentAvaiY, width: self.frame.width, height: labelFontSize)
         viewLabel.frame = labelFrame
-        
         viewLabel.font = UIFont.boldSystemFont(ofSize: labelFontSize)
         
-        //        viewLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: displayGap).isActive = true
-        //        viewLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        currentAvaiY = viewLabel.frame.maxY + displayGap
         
         // MARK: Profile picture
-        let pictureEdge = min(self.frame.width/3, self.frame.height/5)
-        let pictureFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
-                                  y: displayGap + viewLabel.frame.maxY,
-                                  width: pictureEdge,
-                                  height: pictureEdge)
-        profileImageView.frame = pictureFrame
-        profileImageView.layer.cornerRadius = pictureEdge*0.5
         
-        profileImageView.image = UIImage(systemName: "person.circle.fill")
-        profileImageView.tintColor = UIColor.black
+        if objectType != .course {
+            let pictureEdge = min(self.frame.width/3, self.frame.height/5)
+            let pictureFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
+                                      y: currentAvaiY,
+                                      width: pictureEdge,
+                                      height: pictureEdge)
+            profileImageView.frame = pictureFrame
+            profileImageView.layer.cornerRadius = pictureEdge*0.5
+            
+            profileImageView.image = UIImage(systemName: "person.circle.fill")
+            profileImageView.tintColor = UIColor.black
+            
+            currentAvaiY = pictureFrame.maxY + displayGap
+        }
         
         // MARK: Attribute table
-        let tableY = pictureFrame.maxY + displayGap
-        let tableHeight = self.frame.height - tableY
+        let tableHeight = self.frame.height - currentAvaiY
         //min(self.frame.height - tableY, attributeTable.contentSize.height*2)
         
         let tableFrame = CGRect(x: 0,
-                                y: tableY,
+                                y: currentAvaiY + displayGap,
                                 width: self.frame.width,
                                 height: tableHeight)
         

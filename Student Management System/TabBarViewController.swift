@@ -25,12 +25,15 @@ class TabBarViewController: UITabBarController {
         let tabBarTitles = ["Students", "Professor", "Courses"]
         let tabBarImages = ["person.fill", "person.crop.square", "book"]
         
+        self.tabBar.tintColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        
         for i in 0..<3 {
             let barItem = self.tabBar.items?[i]
             barItem?.title = tabBarTitles[i]
             barItem?.image = UIImage(systemName: tabBarImages[i])
+            
             (self.viewControllers?[i] as? MasterViewController)?.mode = DataModel.ObjectType.all[i]
-            barItem?.badgeColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+            
         }
     }
     
