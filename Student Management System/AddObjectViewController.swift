@@ -11,10 +11,12 @@ import CoreData
 
 class AddObjectViewController: UIViewController {
     
+    // MARK: Valiables
     @IBOutlet weak var infoQueryView: ObjectInfoView!
     
     var objectType = DataModel.ObjectType.student
     
+    // MARK: Set up
     override func viewDidLoad() {
         super.viewDidLoad()
         infoQueryView.objectType = self.objectType
@@ -27,8 +29,8 @@ class AddObjectViewController: UIViewController {
         
     }
     
+    // MARK: Functional Features
     @IBAction func saveInfo(_ sender: Any) {
-
         switch objectType {
         case .student:
             createNewObject(model: Student())
@@ -58,10 +60,11 @@ class AddObjectViewController: UIViewController {
         let inputtedData = infoQueryView.getInputedData()
         
         for key in inputtedData.keys {
-            newObject[key] = inputtedData[key]
+            newObject.setValue(inputtedData[key], forKey: key)
+//            newObject[key] = inputtedData[key]
         }
         
-        newObject["descriptionID"] = newObject.description
+        newObject.setValue(newObject.description, forKey: "descriptionID")
         
         // Save the context.
         do {

@@ -42,30 +42,30 @@ class DataModel {
 //}
 
 extension Student {
-    @objc override subscript(key:String) -> Any? {
-        get {return nil}
-        set(newValue) {
-            switch key {
-            case "firstName":
-                self.firstName = newValue as? String
-            case "lastName":
-                self.lastName = newValue as? String
-            case "email":
-                self.email = newValue as? String
-            case "id":
-                self.id = newValue as? String
-            case "phone":
-                self.phone = newValue as? String
-            case "campusAddress":
-                self.campusAddress = newValue as? String
-            case "photo":
-                self.photo = newValue as? Data
-            default:
-                print("Attribute does not exits")
-                return
-            }
-        }
-    }
+//    @objc override subscript(key:String) -> Any? {
+//        get {return nil}
+//        set(newValue) {
+//            switch key {
+//            case "firstName":
+//                self.firstName = newValue as? String
+//            case "lastName":
+//                self.lastName = newValue as? String
+//            case "email":
+//                self.email = newValue as? String
+//            case "id":
+//                self.id = newValue as? String
+//            case "phone":
+//                self.phone = newValue as? String
+//            case "campusAddress":
+//                self.campusAddress = newValue as? String
+//            case "photo":
+//                self.photo = newValue as? Data
+//            default:
+//                print("Attribute does not exits")
+//                return
+//            }
+//        }
+//    }
     
     override public var description: String {
         return "\(self.firstName ?? "") \(self.lastName ?? "")"
@@ -73,28 +73,28 @@ extension Student {
 }
 
 extension Professor {
-    @objc override subscript(key:String) -> Any? {
-        get {return nil}
-        set(newValue) {
-            switch key {
-            case "firstName":
-                self.firstName = newValue as? String
-            case "lastName":
-                self.lastName = newValue as? String
-            case "email":
-                self.email = newValue as? String
-            case "officeAddress":
-                self.officeAddress = newValue as? String
-            case "homeAddress":
-                self.homeAddress = newValue as? String
-            case "photo":
-                self.photo = newValue as? Data
-            default:
-                print("Attribute does not exits")
-                return
-            }
-        }
-    }
+//    @objc override subscript(key:String) -> Any? {
+//        get {return nil}
+//        set(newValue) {
+//            switch key {
+//            case "firstName":
+//                self.firstName = newValue as? String
+//            case "lastName":
+//                self.lastName = newValue as? String
+//            case "email":
+//                self.email = newValue as? String
+//            case "officeAddress":
+//                self.officeAddress = newValue as? String
+//            case "homeAddress":
+//                self.homeAddress = newValue as? String
+//            case "photo":
+//                self.photo = newValue as? Data
+//            default:
+//                print("Attribute does not exits")
+//                return
+//            }
+//        }
+//    }
     
     override public var description: String {
         return "\(self.firstName ?? "") \(self.lastName ?? "")"
@@ -102,41 +102,39 @@ extension Professor {
 }
 
 extension Course {
-    @objc override subscript(key:String) -> Any? {
-        get {return nil}
-        set(newValue) {
-            switch key {
-            case "departmentCode":
-                self.departmentCode = newValue as? String
-            case "number":
-                self.number = newValue as? String
-            case "name":
-                self.name = newValue as? String
-            case "meetingDay":
-                self.meetingDay = newValue as? String
-            case "time":
-                self.time = newValue as? String
-            case "location":
-                self.location = newValue as? String
-            default:
-                print("Attribute does not exits")
-                return
-            }
-        }
-    }
-    
-    
+//    @objc override subscript(key:String) -> Any? {
+//        get {return nil}
+//        set(newValue) {
+//            switch key {
+//            case "departmentCode":
+//                self.departmentCode = newValue as? String
+//            case "number":
+//                self.number = newValue as? String
+//            case "name":
+//                self.name = newValue as? String
+//            case "meetingDay":
+//                self.meetingDay = newValue as? String
+//            case "time":
+//                self.time = newValue as? String
+//            case "location":
+//                self.location = newValue as? String
+//            default:
+//                print("Attribute does not exits")
+//                return
+//            }
+//        }
+//    }
     
     override public var description: String {
         return "\(self.departmentCode ?? "")\(self.number ?? "") - \(self.name ?? "")"
     }
 }
 
-extension NSManagedObject {
-    @objc subscript(key:String) -> Any? {
-        get {return nil}
-        set {}
-    }
-}
+//extension NSManagedObject {
+//    @objc subscript(key:String) -> Any? {
+//        get {return nil}
+//        set {}
+//    }
+//}
 
 

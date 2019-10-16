@@ -11,44 +11,35 @@ import CoreData
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-    var objectType = DataModel.ObjectType.student
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-//                var text:String
-//                var Type : Any
-//                Type = Student.self
-//                text = (detailItem as? Type).description ?? ""
-//                switch mode {
-//                case .student:
-//                    text =
-//
-//                case .professor:
-//                    <#code#>
-//                case .course:
-//                    <#code#>
-//                }
-//                label.text = text
+    @IBOutlet weak var objectInfoView: ObjectInfoView!
+    
+    var objectType = DataModel.ObjectType.student {
+        didSet {
+            if objectInfoView != nil {
+                objectInfoView.objectType = self.objectType
             }
         }
     }
+    
+    var object : NSManagedObject? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         configureView()
     }
-
-    var detailItem: NSManagedObject? {
-        didSet {
-            // Update the view.
-            configureView()
-        }
+    
+    func configureView() {
+        // Update the user interface for the detail item.
+        objectInfoView.viewMode = .view
+        objectInfoView.objectType = self.objectType
+        
+        
     }
+    
+//    private func extractData() -> [String:Any] {
+//        
+//    }
 
 
 }

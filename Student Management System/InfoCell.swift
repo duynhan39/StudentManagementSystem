@@ -9,7 +9,7 @@
 import UIKit
 @IBDesignable
 
-class NewInfoCell: UITableViewCell {
+class InfoCell: UITableViewCell {
     
     // MARK: Variables
     
@@ -29,6 +29,13 @@ class NewInfoCell: UITableViewCell {
         return lbl
     }()
     
+    var viewMode = ObjectInfoView.ViewMode.edit {
+        didSet {
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
+    
     var isInfoEditable = true {
         didSet {
             attributeInputTextField.isUserInteractionEnabled = isInfoEditable
@@ -41,15 +48,15 @@ class NewInfoCell: UITableViewCell {
         }
     }
     
-    var placeHolderText = "" {
-        didSet {
-            placeHolderText = convertPlaceHolderString(from: placeHolderText)
-            attributeInputTextField.placeholder = placeHolderText
-        }
+    var placeHolderText : String {
+        return convertPlaceHolderString(from: labelName)
     }
     
     private func convertPlaceHolderString(from text: String) -> String {
         var actualValue = ""
+        
+        if viewMode == .view {return "N/A"}
+        
         switch text {
         case "Time":
             actualValue = "8:00-8:50"
@@ -129,7 +136,8 @@ class NewInfoCell: UITableViewCell {
     
     // MARK: Draw
     override func draw(_ rect: CGRect) {
-        attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
+//        attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
+        attributeInputTextField.placeholder = placeHolderText
     }
     
 }

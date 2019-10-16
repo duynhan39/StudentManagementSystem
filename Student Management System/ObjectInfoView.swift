@@ -33,8 +33,19 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         didSet {
             setNeedsLayout()
             setNeedsDisplay()
-            
-            viewLabel.text = "Create new \(self.objectType.description.lowercased())"
+        }
+    }
+    
+    var viewLabelText : String {
+        get {
+            var text = ""
+            switch viewMode {
+            case .add:
+                text = "Create new \(self.objectType.description.lowercased())"
+            case .edit, .view:
+                text = "\(self.objectType)"
+            }
+            return text
         }
     }
     
@@ -73,7 +84,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         addSubview(viewLabel)
         
         attributeTable.dataSource = self
-        attributeTable.register(NewInfoCell.self, forCellReuseIdentifier: "newInfoCell")
+        attributeTable.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
         attributeTable.bounces = false
         
         attributeTable.allowsSelection =  false
@@ -104,6 +115,8 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         viewLabel.font = UIFont.boldSystemFont(ofSize: labelFontSize)
         
         currentAvaiY = viewLabel.frame.maxY + displayGap
+        
+        viewLabel.text = viewLabelText
         
         // MARK: Profile picture
         
@@ -145,39 +158,19 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         return attributes.count
     }
     
-    // MARK: CELL
+    // MARK: Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let attName = attributes[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! InfoCell
         
         cell.labelName = attName
+        cell.viewMode = viewMode
         
-        cell.placeHolderText = attName
         cell.isInfoEditable = isCellEditable
         
         return cell
     }
-    
-    // MARK: - Retrieve Data
-    func getInputedData() -> [String:Any] {
-        var inputtedData = [String:Any]()
-        
-        let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
-        
-        for i in 0..<attributes.count {
-            let attName = attributes[i]
-            let indexPath = IndexPath(row: i, section: 0)
-            if let cell = attributeTable.cellForRow(at: indexPath) as? NewInfoCell {
-                inputtedData[attributeIds[attName] ?? "None"] = cell.getInputtedContent()
-            }
-        }
-        
-        // Retrieve Image
-        
-        return inputtedData
-    }
-    
     
     /*
      // MARK: - Navigation
@@ -188,6 +181,24 @@ class ObjectInfoView: UIView, UITableViewDataSource {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    // MARK: - Retrieve Data
+    func getInputedData() -> [String:Any] {
+        
+        let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
+        
+        for i in 0..<attributes.count {
+            let attName = attributes[i]
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
+                objectData[attributeIds[attName] ?? "None"] = cell.getInputtedContent()
+            }
+        }
+        
+        // Retrieve Image
+        
+        return objectData
+    }
     
 }
 

@@ -11,12 +11,14 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
     
+    // MARK: Variables
 //    let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(switchEditMode(_:)))
     
     var objectType : DataModel.ObjectType {
         return (self.selectedViewController as? MasterViewController)?.objectType ?? .student
     }
     
+    // MARK: Set up
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +48,8 @@ class TabBarViewController: UITabBarController {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    
+    // MARK: Functional features
     @objc private func insertNewRow(_ sender: Any) {
         turnOffEditMode()
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

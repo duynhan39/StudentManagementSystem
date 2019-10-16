@@ -39,15 +39,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 
-                switch objectType {
-                case .student:
-                    controller.detailItem = object as? Student
-                case .professor:
-                    controller.detailItem = object as? Professor
-                case .course:
-                controller.detailItem = object as? Course
+                controller.objectType = self.objectType
+                controller.object = object
                 
-                }
+//                switch objectType {
+//                case .student:
+//                    controller.object = object as? Student
+//                case .professor:
+//                    controller.object = object as? Professor
+//                case .course:
+//                controller.object = object as? Course
+//                }
                 
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
@@ -69,8 +71,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let student = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, with: student)
+        let object = fetchedResultsController.object(at: indexPath)
+        configureCell(cell, with: object)
         return cell
     }
 
