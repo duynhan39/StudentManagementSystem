@@ -9,16 +9,19 @@
 import UIKit
 @IBDesignable
 
-class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDelegate  {
+class ObjectInfoView: UIView, UITableViewDataSource  {
     
     // MARK: - Variables
     private var attributeTable = UITableView()
-    private var profileImageView = UIImageView()
+    var profileImageView = UIImageView()
     private var viewLabel = UILabel()
+    
+    var parent :UIViewController? = nil
     
     var objectData = [String:Any]() {
         didSet {
             refresh()
+            showProfilePicture()
         }
     }
     
@@ -62,7 +65,6 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         }
     }
     
-    
     fileprivate func refresh() {
         setNeedsLayout()
         setNeedsDisplay()
@@ -89,6 +91,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         
         let tapGuesture = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
         profileImageView.addGestureRecognizer(tapGuesture)
+        profileImageView.image = UIImage(systemName: "person.circle.fill")
         
         attributeTable.dataSource = self
         attributeTable.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
@@ -98,8 +101,51 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         viewLabel.textAlignment = .center
     }
     
+    // MARK: Functional features
+    
     @objc private func pickImage(_ sender: Any) {
-        print("Cool")
+        if parent != nil {
+            print("Cool")
+            parent?.presentImagePicker()
+        } else {
+            print("Not cool")
+            let pickerController = UIImagePickerController()
+            pickerController.sourceType = .camera
+            pickerController.allowsEditing = true
+             //as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+            if parent != nil {
+                pickerController.delegate = parent! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+                parent!.present(pickerController, animated: true)
+            }
+        }
+    }
+    
+    func showProfilePicture() {
+        if viewMode != .add {
+            if let photo = objectData["photo"] as? NSData {
+                profileImageView.image = UIImage(data: photo as Data)
+            }
+        }
+    }
+    
+    // MARK: - Retrieve Data
+    func getInputedData() -> [String:Any] {
+        let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
+        var data = [String:Any]()
+        for i in 0..<attributeNames.count {
+            let attName = attributeNames[i]
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
+                let attVal : String = cell.attributeInputTextField.text ?? ""
+                data[attributeIds[attName] ?? "None"] = attVal
+                print("\(attName) -- \(attVal)")
+            }
+        }
+        
+        data["photo"] = profileImageView.image?.pngData()
+        
+        objectData = data
+        return data
     }
     
     
@@ -140,8 +186,8 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
             
             profileImageView.frame = profilePicFrame
             profileImageView.layer.cornerRadius = pictureEdge*0.5
+            profileImageView.clipsToBounds = true
             
-            profileImageView.image = UIImage(systemName: "person.circle.fill")
             profileImageView.tintColor = UIColor.black
             
             profileImageView.isUserInteractionEnabled = isEditable
@@ -189,7 +235,6 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         }
         cell.attributeInputTextField.text = textFieldContent
         
-        
         return cell
     }
     
@@ -202,26 +247,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
      // Pass the selected object to the new view controller.
      }
      */
-    
-    // MARK: - Retrieve Data
-    func getInputedData() -> [String:Any] {
-        let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
-        var data = [String:Any]()
-        for i in 0..<attributeNames.count {
-            let attName = attributeNames[i]
-            let indexPath = IndexPath(row: i, section: 0)
-            if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
-                let attVal : String = cell.attributeInputTextField.text ?? ""
-                data[attributeIds[attName] ?? "None"] = attVal
-                print("\(attName) -- \(attVal)")
-            }
-        }
-        
-        // Retrieve Image
-        
-        objectData = data
-        return data
-    }
+
     
 }
 
@@ -264,3 +290,6 @@ extension DataModel {
     ]
 }
 
+extension UIViewController {
+    @objc func presentImagePicker() {}
+}
