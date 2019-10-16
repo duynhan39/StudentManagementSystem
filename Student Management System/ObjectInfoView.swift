@@ -196,20 +196,22 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     
     // MARK: - Retrieve Data
     func getInputedData() -> [String:Any] {
-        
         let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
-        
+        var data = [String:Any]()
         for i in 0..<attributes.count {
             let attName = attributes[i]
             let indexPath = IndexPath(row: i, section: 0)
             if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
-                objectData[attributeIds[attName] ?? "None"] = cell.getInputtedContent()
+                let attVal : String = cell.attributeInputTextField.text ?? ""
+                data[attributeIds[attName] ?? "None"] = attVal
+                print("\(attName) -- \(attVal)")
             }
         }
         
         // Retrieve Image
         
-        return objectData
+        objectData = data
+        return data
     }
     
 }

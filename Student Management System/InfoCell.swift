@@ -76,9 +76,9 @@ class InfoCell: UITableViewCell {
     
     
     // MARK: Data function
-    func getInputtedContent() -> String {
-        return attributeInputTextField.text ?? ""
-    }
+//    func getInputtedContent() -> String {
+//        return attributeInputTextField.text ?? ""
+//    }
     
     // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

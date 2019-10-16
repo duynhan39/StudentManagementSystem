@@ -52,10 +52,13 @@ class DetailViewController: UIViewController {
             buttonTitle = "Done"
         } else {
             // Just hit [Done]
-            objectInfoView.viewMode = .view
             
-            // Save
-            
+            let inputtedData = objectInfoView.getInputedData()
+            for key in inputtedData.keys {
+                object?.setValue(inputtedData[key], forKey: key)
+            }
+//            passData()
+//            objectInfoView.viewMode = .view
             buttonTitle = "Edit"
             
         }
@@ -63,14 +66,13 @@ class DetailViewController: UIViewController {
     }
     
     private func passData() {
-        
         var data = [String:Any]()
         let attributesByName = object?.entity.attributesByName ?? [String:Any]()
         
         for (key, _) in attributesByName {
             data[key] = object?.value(forKey: key)
         }
-        
+
         if objectInfoView != nil {
             objectInfoView.objectData = data
         }

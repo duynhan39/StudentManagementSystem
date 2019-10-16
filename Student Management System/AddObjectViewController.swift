@@ -58,10 +58,8 @@ class AddObjectViewController: UIViewController {
 
         let newObject = T(context: context)
         let inputtedData = infoQueryView.getInputedData()
-        
         for key in inputtedData.keys {
             newObject.setValue(inputtedData[key], forKey: key)
-//            newObject[key] = inputtedData[key]
         }
         
         newObject.setValue(newObject.description, forKey: "descriptionID")
