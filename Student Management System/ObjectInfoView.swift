@@ -18,9 +18,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     
     var objectData = [String:Any]() {
         didSet {
-            setNeedsLayout()
-            setNeedsDisplay()
-            attributeTable.reloadData()
+            refresh()
         }
     }
     
@@ -32,8 +30,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     
     var objectType = DataModel.ObjectType.student {
         didSet {
-            setNeedsLayout()
-            setNeedsDisplay()
+            refresh()
         }
     }
     
@@ -52,8 +49,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     
     var viewMode = ObjectInfoView.ViewMode.add {
         didSet {
-            setNeedsLayout()
-            setNeedsDisplay()
+            refresh()
         }
     }
     
@@ -64,6 +60,12 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         case .add, .edit:
             return true
         }
+    }
+    
+    fileprivate func refresh() {
+        setNeedsLayout()
+        setNeedsDisplay()
+        attributeTable.reloadData()
     }
     
     // MARK: - Init
@@ -169,23 +171,15 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         cell.labelName = attName
         cell.viewMode = viewMode
         
-//        for i in 0...10 {print()}
-        print(viewMode)
-        
         var textFieldContent : String
         switch viewMode {
         case .edit, .view:
-            print(attName)
-            print(objectData["firstName"])
             textFieldContent = (objectData[DataModel.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
-            print(textFieldContent)
         default:
             textFieldContent = ""
         }
         cell.attributeInputTextField.text = textFieldContent
         cell.attributeInputTextField.isUserInteractionEnabled = isCellEditable
-        
-//        for i in 0...100 {print()}
         
         return cell
     }

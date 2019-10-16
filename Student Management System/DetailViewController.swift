@@ -33,15 +33,33 @@ class DetailViewController: UIViewController {
         configureView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func configureView() {
+        // Update the user interface for the detail item.
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(switchEditMode(_:)))
+        
+        objectInfoView.viewMode = .view
+        objectInfoView.objectType = self.objectType
         passData()
     }
     
-    func configureView() {
-        // Update the user interface for the detail item.
-        objectInfoView.viewMode = .view
-        objectInfoView.objectType = self.objectType
+    @objc private func switchEditMode(_ sender: Any) {
+        var buttonTitle : String
+        
+        if navigationItem.rightBarButtonItem?.title == "Edit" {
+            // Just hit [Edit]
+            objectInfoView.viewMode = .edit
+            buttonTitle = "Done"
+        } else {
+            // Just hit [Done]
+            objectInfoView.viewMode = .view
+            
+            // Save
+            
+            buttonTitle = "Edit"
+            
+        }
+        navigationItem.rightBarButtonItem?.title = buttonTitle
     }
     
     private func passData() {
