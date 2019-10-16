@@ -33,7 +33,6 @@ class TabBarViewController: UITabBarController {
             barItem?.image = UIImage(systemName: tabBarImages[i])
             
             (self.viewControllers?[i] as? MasterViewController)?.objectType = DataModel.ObjectType.all[i]
-            
         }
     }
     

@@ -16,6 +16,13 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     private var profileImageView = UIImageView()
     private var viewLabel = UILabel()
     
+    var objectData = [String:Any]() {
+        didSet {
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
+    
     private var attributes : [String] {
         get {
             return DataModel.AttributeNames[self.objectType.rawValue] ?? []
@@ -28,7 +35,22 @@ class ObjectInfoView: UIView, UITableViewDataSource {
             setNeedsDisplay()
             
             viewLabel.text = "Create new \(self.objectType.description.lowercased())"
-            
+        }
+    }
+    
+    var viewMode = ObjectInfoView.ViewMode.add {
+        didSet {
+            setNeedsLayout()
+            setNeedsDisplay()
+        }
+    }
+    
+    var isCellEditable : Bool {
+        switch viewMode {
+        case .view:
+            return false
+        case .add, .edit:
+            return true
         }
     }
     
@@ -44,6 +66,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     }
     
     private func commonInit() {
+        objectType = DataModel.ObjectType.student
         
         addSubview(profileImageView)
         addSubview(attributeTable)
@@ -54,8 +77,6 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         attributeTable.bounces = false
         
         attributeTable.allowsSelection =  false
-        
-        viewLabel.text = "Create new student"
         viewLabel.textAlignment = .center
     }
     
@@ -73,7 +94,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         
         let displayGap : CGFloat = 15
         var currentAvaiY : CGFloat = displayGap
-
+        
         
         // MARK: Name label
         
@@ -124,12 +145,16 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         return attributes.count
     }
     
+    // MARK: CELL
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let attName = attributes[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! NewInfoCell
         
-        let attName = attributes[indexPath.row]
         cell.labelName = attName
+        
         cell.placeHolderText = attName
+        cell.isInfoEditable = isCellEditable
         
         return cell
     }
@@ -164,6 +189,12 @@ class ObjectInfoView: UIView, UITableViewDataSource {
      }
      */
     
+}
+
+extension ObjectInfoView {
+    enum ViewMode: Int {
+        case add, edit, view
+    }
 }
 
 // MARK: - Extension

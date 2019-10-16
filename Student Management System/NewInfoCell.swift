@@ -29,6 +29,11 @@ class NewInfoCell: UITableViewCell {
         return lbl
     }()
     
+    var isInfoEditable = true {
+        didSet {
+            attributeInputTextField.isUserInteractionEnabled = isInfoEditable
+        }
+    }
     
     var labelName = "" {
         didSet {
