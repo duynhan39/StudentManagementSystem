@@ -15,6 +15,8 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
     private var attributeTable = UITableView()
     private var profileImageView = UIImageView()
     private var viewLabel = UILabel()
+    private var editImageButton = UIButton()
+    
     var profilePicFrame = CGRect()
     
     var objectData = [String:Any]() {
@@ -77,13 +79,20 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         addSubview(profileImageView)
         addSubview(attributeTable)
         addSubview(viewLabel)
+        addSubview(editImageButton)
         
         attributeTable.dataSource = self
         attributeTable.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
         attributeTable.bounces = false
-        
         attributeTable.allowsSelection =  false
+        
         viewLabel.textAlignment = .center
+        
+        editImageButton.addTarget(self, action: #selector(pickImage(_:)), for: UIControl.Event.touchUpInside)
+    }
+    
+    @objc private func pickImage(_ sender: Any) {
+        print("Cool")
     }
     
     
@@ -113,7 +122,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         
         viewLabel.text = viewLabelText
         
-        // MARK: Profile picture
+
         
         if objectType != .course {
             let pictureEdge = min(self.frame.width/3, self.frame.height/5)
@@ -122,7 +131,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
                                       width: pictureEdge,
                                       height: pictureEdge)
             
-//            UIBezierPath(arcCenter: CGPoint(x: self.frame.width*0.5,,y: currentAvaiY + pictureRaius), radius: pictureRaius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+            // MARK: Profile picture
             
             profileImageView.frame = profilePicFrame
             profileImageView.layer.cornerRadius = pictureEdge*0.5
@@ -131,7 +140,14 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
             profileImageView.tintColor = UIColor.black
             
             currentAvaiY = profilePicFrame.maxY + displayGap
+            
+            // MARK: Edit profile image button
+            
+            editImageButton.frame = profilePicFrame
+            editImageButton.layer.cornerRadius = pictureEdge*0.5
         }
+        
+        
         
         // MARK: Attribute table
         let tableHeight = self.frame.height - currentAvaiY
