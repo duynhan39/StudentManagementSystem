@@ -42,6 +42,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 controller.objectType = self.objectType
                 controller.object = object
                 
+//                print("MASTERVIEWWWW")
+//                print(object.value(forKey: "firstName"))
+                
 //                switch objectType {
 //                case .student:
 //                    controller.object = object as? Student

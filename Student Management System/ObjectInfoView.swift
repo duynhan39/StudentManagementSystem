@@ -20,6 +20,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         didSet {
             setNeedsLayout()
             setNeedsDisplay()
+            attributeTable.reloadData()
         }
     }
     
@@ -89,6 +90,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
         
         attributeTable.allowsSelection =  false
         viewLabel.textAlignment = .center
+        
     }
     
     
@@ -160,14 +162,30 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     
     // MARK: Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let attName = attributes[indexPath.row]
+        let attName : String = attributes[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! InfoCell
         
         cell.labelName = attName
         cell.viewMode = viewMode
         
-        cell.isInfoEditable = isCellEditable
+//        for i in 0...10 {print()}
+        print(viewMode)
+        
+        var textFieldContent : String
+        switch viewMode {
+        case .edit, .view:
+            print(attName)
+            print(objectData["firstName"])
+            textFieldContent = (objectData[DataModel.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
+            print(textFieldContent)
+        default:
+            textFieldContent = ""
+        }
+        cell.attributeInputTextField.text = textFieldContent
+        cell.attributeInputTextField.isUserInteractionEnabled = isCellEditable
+        
+//        for i in 0...100 {print()}
         
         return cell
     }

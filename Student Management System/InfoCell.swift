@@ -21,7 +21,7 @@ class InfoCell: UITableViewCell {
         return lbl
     }()
     
-    private var attributeInputTextField : UITextField = {
+    var attributeInputTextField : UITextField = {
         let lbl = UITextField()
         lbl.textColor = .black
         lbl.font = UIFont.systemFont(ofSize: 17)
@@ -36,11 +36,11 @@ class InfoCell: UITableViewCell {
         }
     }
     
-    var isInfoEditable = true {
-        didSet {
-            attributeInputTextField.isUserInteractionEnabled = isInfoEditable
-        }
-    }
+//    var isInfoEditable = true {
+//        didSet {
+//            attributeInputTextField.isUserInteractionEnabled = isInfoEditable
+//        }
+//    }
     
     var labelName = "" {
         didSet {
