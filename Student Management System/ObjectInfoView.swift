@@ -9,7 +9,7 @@
 import UIKit
 @IBDesignable
 
-class ObjectInfoView: UIView, UITableViewDataSource {
+class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDelegate  {
     
     // MARK: - Variables
     private var attributeTable = UITableView()
@@ -50,15 +50,6 @@ class ObjectInfoView: UIView, UITableViewDataSource {
     var viewMode = ObjectInfoView.ViewMode.add {
         didSet {
             refresh()
-        }
-    }
-    
-    var isCellEditable : Bool {
-        switch viewMode {
-        case .view:
-            return false
-        case .add, .edit:
-            return true
         }
     }
     
@@ -179,7 +170,7 @@ class ObjectInfoView: UIView, UITableViewDataSource {
             textFieldContent = ""
         }
         cell.attributeInputTextField.text = textFieldContent
-        cell.attributeInputTextField.isUserInteractionEnabled = isCellEditable
+        
         
         return cell
     }
