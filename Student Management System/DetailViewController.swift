@@ -37,6 +37,7 @@ class DetailViewController: UIViewController {
         // Update the user interface for the detail item.
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(switchEditMode(_:)))
+        navigationItem.title = "Info"
         
         objectInfoView.viewMode = .view
         objectInfoView.objectType = self.objectType
@@ -57,8 +58,7 @@ class DetailViewController: UIViewController {
             for key in inputtedData.keys {
                 object?.setValue(inputtedData[key], forKey: key)
             }
-//            passData()
-//            objectInfoView.viewMode = .view
+            objectInfoView.viewMode = .view
             buttonTitle = "Edit"
             
         }
