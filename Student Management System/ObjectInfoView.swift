@@ -15,7 +15,6 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
     private var attributeTable = UITableView()
     private var profileImageView = UIImageView()
     private var viewLabel = UILabel()
-    var profilePicFrame = CGRect()
     
     var objectData = [String:Any]() {
         didSet {
@@ -23,7 +22,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         }
     }
     
-    private var attributes : [String] {
+    private var attributeNames : [String] {
         get {
             return DataModel.AttributeNames[self.objectType.rawValue] ?? []
         }
@@ -54,6 +53,16 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         }
     }
     
+    var isEditable : Bool {
+        switch viewMode {
+        case .view:
+            return false
+        case .add, .edit:
+            return true
+        }
+    }
+    
+    
     fileprivate func refresh() {
         setNeedsLayout()
         setNeedsDisplay()
@@ -78,12 +87,19 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         addSubview(attributeTable)
         addSubview(viewLabel)
         
+        let tapGuesture = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
+        profileImageView.addGestureRecognizer(tapGuesture)
+        
         attributeTable.dataSource = self
         attributeTable.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
         attributeTable.bounces = false
-        
         attributeTable.allowsSelection =  false
+        
         viewLabel.textAlignment = .center
+    }
+    
+    @objc private func pickImage(_ sender: Any) {
+        print("Cool")
     }
     
     
@@ -117,18 +133,18 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         
         if objectType != .course {
             let pictureEdge = min(self.frame.width/3, self.frame.height/5)
-            profilePicFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
+            let profilePicFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
                                       y: currentAvaiY,
                                       width: pictureEdge,
                                       height: pictureEdge)
-            
-//            UIBezierPath(arcCenter: CGPoint(x: self.frame.width*0.5,,y: currentAvaiY + pictureRaius), radius: pictureRaius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
             
             profileImageView.frame = profilePicFrame
             profileImageView.layer.cornerRadius = pictureEdge*0.5
             
             profileImageView.image = UIImage(systemName: "person.circle.fill")
             profileImageView.tintColor = UIColor.black
+            
+            profileImageView.isUserInteractionEnabled = isEditable
             
             currentAvaiY = profilePicFrame.maxY + displayGap
         }
@@ -151,17 +167,18 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attributes.count
+        return attributeNames.count
     }
     
     // MARK: Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let attName : String = attributes[indexPath.row]
+        let attName : String = attributeNames[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! InfoCell
         
         cell.labelName = attName
         cell.viewMode = viewMode
+        cell.attributeInputTextField.isUserInteractionEnabled = isEditable
         
         var textFieldContent : String
         switch viewMode {
@@ -190,8 +207,8 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
     func getInputedData() -> [String:Any] {
         let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
         var data = [String:Any]()
-        for i in 0..<attributes.count {
-            let attName = attributes[i]
+        for i in 0..<attributeNames.count {
+            let attName = attributeNames[i]
             let indexPath = IndexPath(row: i, section: 0)
             if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
                 let attVal : String = cell.attributeInputTextField.text ?? ""

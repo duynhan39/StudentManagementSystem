@@ -36,14 +36,6 @@ class InfoCell: UITableViewCell {
         }
     }
     
-    var isCellEditable : Bool {
-        switch viewMode {
-        case .view:
-            return false
-        case .add, .edit:
-            return true
-        }
-    }
     
 //    var isInfoEditable = true {
 //        didSet {
@@ -147,7 +139,6 @@ class InfoCell: UITableViewCell {
     override func draw(_ rect: CGRect) {
 //        attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
         attributeInputTextField.placeholder = placeHolderText
-        attributeInputTextField.isUserInteractionEnabled = isCellEditable
     }
     
 }
