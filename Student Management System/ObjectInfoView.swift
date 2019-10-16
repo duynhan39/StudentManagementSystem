@@ -15,6 +15,7 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
     private var attributeTable = UITableView()
     private var profileImageView = UIImageView()
     private var viewLabel = UILabel()
+    var profilePicFrame = CGRect()
     
     var objectData = [String:Any]() {
         didSet {
@@ -83,7 +84,6 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         
         attributeTable.allowsSelection =  false
         viewLabel.textAlignment = .center
-        
     }
     
     
@@ -117,23 +117,24 @@ class ObjectInfoView: UIView, UITableViewDataSource, UINavigationControllerDeleg
         
         if objectType != .course {
             let pictureEdge = min(self.frame.width/3, self.frame.height/5)
-            let pictureFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
+            profilePicFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
                                       y: currentAvaiY,
                                       width: pictureEdge,
                                       height: pictureEdge)
-            profileImageView.frame = pictureFrame
+            
+//            UIBezierPath(arcCenter: CGPoint(x: self.frame.width*0.5,,y: currentAvaiY + pictureRaius), radius: pictureRaius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+            
+            profileImageView.frame = profilePicFrame
             profileImageView.layer.cornerRadius = pictureEdge*0.5
             
             profileImageView.image = UIImage(systemName: "person.circle.fill")
             profileImageView.tintColor = UIColor.black
             
-            currentAvaiY = pictureFrame.maxY + displayGap
+            currentAvaiY = profilePicFrame.maxY + displayGap
         }
         
         // MARK: Attribute table
         let tableHeight = self.frame.height - currentAvaiY
-        //min(self.frame.height - tableY, attributeTable.contentSize.height*2)
-        
         let tableFrame = CGRect(x: 0,
                                 y: currentAvaiY + displayGap,
                                 width: self.frame.width,
