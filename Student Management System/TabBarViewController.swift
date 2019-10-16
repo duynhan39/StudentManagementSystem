@@ -13,8 +13,8 @@ class TabBarViewController: UITabBarController {
     
 //    let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(switchEditMode(_:)))
     
-    var mode : DataModel.ObjectType {
-        return (self.selectedViewController as? MasterViewController)?.mode ?? .student
+    var objectType : DataModel.ObjectType {
+        return (self.selectedViewController as? MasterViewController)?.objectType ?? .student
     }
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class TabBarViewController: UITabBarController {
             barItem?.title = tabBarTitles[i]
             barItem?.image = UIImage(systemName: tabBarImages[i])
             
-            (self.viewControllers?[i] as? MasterViewController)?.mode = DataModel.ObjectType.all[i]
+            (self.viewControllers?[i] as? MasterViewController)?.objectType = DataModel.ObjectType.all[i]
             
         }
     }
@@ -51,7 +51,7 @@ class TabBarViewController: UITabBarController {
         turnOffEditMode()
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newAddObjectController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
-        newAddObjectController.mode = self.mode
+        newAddObjectController.objectType = self.objectType
         
         self.present(newAddObjectController, animated: true, completion: nil)
     }

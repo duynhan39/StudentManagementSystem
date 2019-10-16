@@ -14,7 +14,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
-    var mode = DataModel.ObjectType.student
+    var objectType = DataModel.ObjectType.student
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 
-                switch mode {
+                switch objectType {
                 case .student:
                     controller.detailItem = object as? Student
                 case .professor:
@@ -108,7 +108,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // MARK: Choosing the entity
         
-        switch mode {
+        switch objectType {
         case .student:
             fetchData(model: Student())
         case .professor:

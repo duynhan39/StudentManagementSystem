@@ -13,7 +13,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-    var mode = DataModel.ObjectType.student
+    var objectType = DataModel.ObjectType.student
 
     func configureView() {
         // Update the user interface for the detail item.

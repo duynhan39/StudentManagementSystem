@@ -9,7 +9,7 @@
 import UIKit
 @IBDesignable
 
-class NewObjectView: UIView, UITableViewDataSource {
+class ObjectInfoView: UIView, UITableViewDataSource {
     
     // MARK: - Variables
     private var attributeTable = UITableView()

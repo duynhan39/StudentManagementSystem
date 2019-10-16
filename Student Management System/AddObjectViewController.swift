@@ -11,13 +11,13 @@ import CoreData
 
 class AddObjectViewController: UIViewController {
     
-    @IBOutlet weak var infoQueryView: NewObjectView!
+    @IBOutlet weak var infoQueryView: ObjectInfoView!
     
-    var mode = DataModel.ObjectType.student
+    var objectType = DataModel.ObjectType.student
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        infoQueryView.objectType = self.mode
+        infoQueryView.objectType = self.objectType
         
         self.isModalInPresentation = true
     }
@@ -29,7 +29,7 @@ class AddObjectViewController: UIViewController {
     
     @IBAction func saveInfo(_ sender: Any) {
 
-        switch mode {
+        switch objectType {
         case .student:
             createNewObject(model: Student())
         case .professor:
