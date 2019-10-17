@@ -30,7 +30,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     private var attributeNames : [String] {
         get {
-            return DataModel.AttributeNames[self.objectType.rawValue] ?? []
+            return ObjectInfoView.AttributeNames[self.objectType.rawValue] ?? []
         }
     }
     
@@ -127,7 +127,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     // MARK: - Retrieve Data
     func getInputedData() -> [String:Any] {
-        let attributeIds : [String:String] = DataModel.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
+        let attributeIds : [String:String] = ObjectInfoView.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
         var data = [String:Any]()
         for i in 0..<attributeNames.count {
             let attName = attributeNames[i]
@@ -229,7 +229,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         var textFieldContent : String
         switch viewMode {
         case .edit, .view:
-            textFieldContent = (objectData[DataModel.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
+            textFieldContent = (objectData[ObjectInfoView.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
         default:
             textFieldContent = ""
         }
@@ -251,14 +251,12 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
 }
 
+// MARK: - Extension
 extension ObjectInfoView {
     enum ViewMode: Int {
         case add, edit, view
     }
-}
-
-// MARK: - Extension
-extension DataModel {
+    
     static let AttributeDecodedValue : [String : [String:String]] = [
         "Student" :     ["First name" : "firstName",
                          "Last name" : "lastName",

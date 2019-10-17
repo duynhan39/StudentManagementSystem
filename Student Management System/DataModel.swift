@@ -21,6 +21,17 @@ class DataModel {
         
         static var all = [DataModel.ObjectType.student, .professor, .course]
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 extension Student {
