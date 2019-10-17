@@ -165,7 +165,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="infoQueryView" destination="qFP-zb-LVq" id="ERH-0i-D6O"/>
+                        <outlet property="objectInfoView" destination="qFP-zb-LVq" id="ERH-0i-D6O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xt-pI-EYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

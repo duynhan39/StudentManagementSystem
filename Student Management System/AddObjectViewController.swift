@@ -9,10 +9,10 @@
 import UIKit
 import CoreData
 
-class AddObjectViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AddObjectViewController: InfoViewController {
     
     // MARK: Valiables
-    @IBOutlet weak var infoQueryView: ObjectInfoView!
+    @IBOutlet weak var objectInfoView: ObjectInfoView!
     
     var objectType = DataModel.ObjectType.student
     
@@ -20,12 +20,9 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
-        
-        infoQueryView.objectType = self.objectType
-        
+        objectInfoView.objectType = self.objectType
         self.isModalInPresentation = true
-        
-        infoQueryView.parent = self
+        objectInfoView.parent = self
     }
     
     // MARK: Functional Features
@@ -46,35 +43,40 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
         goBackToPreviousView()
     }
     
-    override func presentImagePicker() {
-        print("Wut?!")
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
-        
-        if  UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            pickerController.sourceType = .photoLibrary
-        }
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            pickerController.sourceType = .camera
-        }
-    
-        self.present(pickerController, animated: true)
+    override func updateProfile(with image: UIImage) {
+        objectInfoView.profileImageView.image = image
+        objectInfoView.didSetImage = true
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true)
-
-        guard let image = info[.editedImage] as? UIImage else {
-            print("No image found")
-            return
-        }
-        
-        infoQueryView.profileImageView.image = image
-        infoQueryView.didSetImage = true
-        
-    }
+//    override func presentImagePicker() {
+//        print("Wut?!")
+//        let pickerController = UIImagePickerController()
+//        pickerController.delegate = self
+//        pickerController.allowsEditing = true
+//
+//        if  UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//            pickerController.sourceType = .photoLibrary
+//        }
+//
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            pickerController.sourceType = .camera
+//        }
+//
+//        self.present(pickerController, animated: true)
+//    }
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        picker.dismiss(animated: true)
+//
+//        guard let image = info[.editedImage] as? UIImage else {
+//            print("No image found")
+//            return
+//        }
+//
+//        infoQueryView.profileImageView.image = image
+//        infoQueryView.didSetImage = true
+//
+//    }
 
     private func createNewObject<T: NSManagedObject>(model: T) {
         
@@ -84,7 +86,7 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
         let context = appDelegate.persistentContainer.viewContext
 
         let newObject = T(context: context)
-        let inputtedData = infoQueryView.getInputedData()
+        let inputtedData = objectInfoView.getInputedData()
         for key in inputtedData.keys {
             print(key)
             newObject.setValue(inputtedData[key], forKey: key)
