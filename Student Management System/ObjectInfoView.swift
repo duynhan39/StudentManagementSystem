@@ -17,6 +17,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     private var viewLabel = UILabel()
     
     let defaultSystemImage = "person.circle.fill"
+    var didSetImage = false
     
     var parent :UIViewController? = nil
     
@@ -114,7 +115,11 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     func showProfilePicture() {
         if viewMode != .add {
             if let data = objectData["photo"] as? NSData {
-                let image = UIImage(data: data as Data) ?? UIImage(systemName: defaultSystemImage)
+                var image = UIImage(data: data as Data)
+                if image == nil {
+                    didSetImage = false
+                    image = UIImage(systemName: defaultSystemImage)
+                }
                 profileImageView.image = image
             }
         }
@@ -130,11 +135,13 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
                 let attVal : String = cell.attributeInputTextField.text ?? ""
                 data[attributeIds[attName] ?? "None"] = attVal
-                print("\(attName) -- \(attVal)")
+//                print("\(attName) -- \(attVal)")
             }
         }
         
-        data["photo"] = profileImageView.image?.pngData()
+        if didSetImage {
+            data["photo"] = profileImageView.image?.pngData()
+        }
         
         objectData = data
         return data
@@ -146,6 +153,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     private func updateProperties() {
         attributeTable.reloadData()
         attributeTable.isUserInteractionEnabled = isEditable
+        profileImageView.isUserInteractionEnabled = isEditable
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -185,8 +193,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             profileImageView.clipsToBounds = true
             
             profileImageView.tintColor = UIColor.black
-            
-            profileImageView.isUserInteractionEnabled = isEditable
             
             currentAvaiY = profilePicFrame.maxY + displayGap
         }

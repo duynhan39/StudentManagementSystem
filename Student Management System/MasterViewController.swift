@@ -27,7 +27,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
         super.viewWillAppear(animated)
     }
     
@@ -41,18 +41,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 
                 controller.objectType = self.objectType
                 controller.object = object
-                
-//                print("MASTERVIEWWWW")
-//                print(object.value(forKey: "firstName"))
-                
-//                switch objectType {
-//                case .student:
-//                    controller.object = object as? Student
-//                case .professor:
-//                    controller.object = object as? Professor
-//                case .course:
-//                controller.object = object as? Course
-//                }
                 
                 controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true

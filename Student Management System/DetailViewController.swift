@@ -105,8 +105,8 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
             return
         }
 
-        // print out the image size as a test
         objectInfoView.profileImageView.image = image
+        objectInfoView.didSetImage = true
     }
 
 

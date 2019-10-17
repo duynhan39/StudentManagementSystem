@@ -47,6 +47,7 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
     }
     
     override func presentImagePicker() {
+        print("Wut?!")
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
@@ -69,9 +70,10 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
             print("No image found")
             return
         }
-
-        // print out the image size as a test
+        
         infoQueryView.profileImageView.image = image
+        infoQueryView.didSetImage = true
+        
     }
 
     private func createNewObject<T: NSManagedObject>(model: T) {
