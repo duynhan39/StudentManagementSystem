@@ -36,13 +36,6 @@ class InfoCell: UITableViewCell {
         }
     }
     
-    
-//    var isInfoEditable = true {
-//        didSet {
-//            attributeInputTextField.isUserInteractionEnabled = isInfoEditable
-//        }
-//    }
-    
     var labelName = "" {
         didSet {
             attributeNameLabel.text = labelName
@@ -52,34 +45,6 @@ class InfoCell: UITableViewCell {
     var placeHolderText : String {
         return convertPlaceHolderString(from: labelName)
     }
-    
-    private func convertPlaceHolderString(from text: String) -> String {
-        var actualValue = ""
-        
-        if viewMode == .view {return "N/A"}
-        
-        switch text {
-        case "Time":
-            actualValue = "8:00-8:50"
-        case "Meeting days":
-            actualValue = "M T W Th F Sa Su"
-        case "Email":
-            actualValue = "example@email.com"
-        case "Phone number":
-            actualValue = "XXX-XXX-XXXX"
-        case "Student ID":
-            actualValue = "7-digit number"
-        default:
-            actualValue = text
-        }
-        return actualValue
-    }
-    
-    
-    // MARK: Data function
-//    func getInputtedContent() -> String {
-//        return attributeInputTextField.text ?? ""
-//    }
     
     // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -137,7 +102,6 @@ class InfoCell: UITableViewCell {
     
     // MARK: Draw
     override func draw(_ rect: CGRect) {
-//        attributeInputTextField.layer.cornerRadius = attributeInputTextField.frame.height*0.2
         attributeInputTextField.placeholder = placeHolderText
     }
     
@@ -145,8 +109,31 @@ class InfoCell: UITableViewCell {
 
 // MARK: Extensions
 
+extension InfoCell {
+    private func convertPlaceHolderString(from text: String) -> String {
+        var actualValue = ""
+        
+        if viewMode == .view {return "N/A"}
+        
+        switch text {
+        case "Time":
+            actualValue = "8:00-8:50"
+        case "Meeting days":
+            actualValue = "M T W Th F Sa Su"
+        case "Email":
+            actualValue = "example@email.com"
+        case "Phone number":
+            actualValue = "XXX-XXX-XXXX"
+        case "Student ID":
+            actualValue = "7-digit number"
+        default:
+            actualValue = text
+        }
+        return actualValue
+    }
+}
+
 extension UIView {
-    
     func anchor (top: NSLayoutYAxisAnchor?,
                  left: NSLayoutXAxisAnchor?,
                  bottom: NSLayoutYAxisAnchor?,
@@ -188,7 +175,5 @@ extension UIView {
         if width != 0 {
             widthAnchor.constraint(equalToConstant: width).isActive = true
         }
-        
     }
-    
 }

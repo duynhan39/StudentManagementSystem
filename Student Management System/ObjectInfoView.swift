@@ -135,7 +135,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
                 let attVal : String = cell.attributeInputTextField.text ?? ""
                 data[attributeIds[attName] ?? "None"] = attVal
-//                print("\(attName) -- \(attVal)")
             }
         }
         
@@ -226,7 +225,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         
         cell.labelName = attName
         cell.viewMode = viewMode
-//        cell.attributeInputTextField.isUserInteractionEnabled = isEditable
         
         var textFieldContent : String
         switch viewMode {
@@ -285,9 +283,7 @@ extension DataModel {
     
     static let AttributeNames = [
         "Student" : ["First name", "Last name", "Email", "Student ID", "Phone number", "Campus address"],
-        
         "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"],
-        
         "Course" : ["Department Code", "Course number", "Course name", "Meeting days", "Time", "Location"]
     ]
 }
