@@ -22,6 +22,8 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        overrideUserInterfaceStyle = .light
+        
         setUpBarButtonItems()
         
         let tabBarTitles = ["Students", "Professor", "Courses"]

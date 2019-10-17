@@ -19,6 +19,8 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
     // MARK: Set up
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
+        
         infoQueryView.objectType = self.objectType
         
         self.isModalInPresentation = true

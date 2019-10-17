@@ -29,6 +29,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         // Do any additional setup after loading the view.
         configureView()
     }
