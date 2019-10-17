@@ -86,6 +86,7 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
         let newObject = T(context: context)
         let inputtedData = infoQueryView.getInputedData()
         for key in inputtedData.keys {
+            print(key)
             newObject.setValue(inputtedData[key], forKey: key)
         }
         

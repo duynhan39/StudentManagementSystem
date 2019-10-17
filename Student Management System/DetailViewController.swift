@@ -57,13 +57,10 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
         } else {
             // Just hit [Done]
             
-            let inputtedData = objectInfoView.getInputedData()
-            for key in inputtedData.keys {
-                object?.setValue(inputtedData[key], forKey: key)
-            }
+            saveObjectData()
+            
             objectInfoView.viewMode = .view
             buttonTitle = "Edit"
-            
         }
         navigationItem.rightBarButtonItem?.title = buttonTitle
     }
@@ -78,6 +75,29 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
 
         if objectInfoView != nil {
             objectInfoView.objectData = data
+        }
+    }
+    
+    private func saveObjectData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let inputtedData = objectInfoView.getInputedData()
+        for key in inputtedData.keys {
+            object?.setValue(inputtedData[key], forKey: key)
+        }
+        
+        
+        // Save the context.
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
