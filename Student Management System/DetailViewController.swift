@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var objectInfoView: ObjectInfoView!
     
@@ -41,9 +41,11 @@ class DetailViewController: UIViewController {
         
         objectInfoView.viewMode = .view
         objectInfoView.objectType = self.objectType
+        objectInfoView.parent = self
         passData()
     }
     
+    // MARK: Functional Feature
     @objc private func switchEditMode(_ sender: Any) {
         var buttonTitle : String
         
@@ -76,6 +78,34 @@ class DetailViewController: UIViewController {
         if objectInfoView != nil {
             objectInfoView.objectData = data
         }
+    }
+    
+    override func presentImagePicker() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        
+        if  UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            pickerController.sourceType = .photoLibrary
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            pickerController.sourceType = .camera
+        }
+    
+        self.present(pickerController, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+
+        guard let image = info[.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+
+        // print out the image size as a test
+        objectInfoView.profileImageView.image = image
     }
 
 

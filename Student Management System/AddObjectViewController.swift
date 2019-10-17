@@ -71,11 +71,7 @@ class AddObjectViewController: UIViewController, UINavigationControllerDelegate,
         // print out the image size as a test
         infoQueryView.profileImageView.image = image
     }
-    
-    
-    
-    
-    // MARK: Helper Function
+
     private func createNewObject<T: NSManagedObject>(model: T) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
