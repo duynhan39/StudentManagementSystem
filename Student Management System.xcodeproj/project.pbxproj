@@ -76,6 +76,7 @@
 				5442CF6A23450B9D00D438AE /* AppDelegate.swift */,
 				5442CF6F23450B9D00D438AE /* SceneDelegate.swift */,
 				5420FDD12354262900FF7285 /* TabBarViewController.swift */,
+				5455EB3F235929F600DFDDA1 /* InfoViewController.swift */,
 				5442CF7123450B9D00D438AE /* MasterViewController.swift */,
 				5442CF7323450B9D00D438AE /* DetailViewController.swift */,
 				54B4AF442353D721003CD70B /* AddObjectViewController.swift */,
@@ -86,7 +87,6 @@
 				5442CF7D23450B9E00D438AE /* Info.plist */,
 				5442CF7A23450B9D00D438AE /* LaunchScreen.storyboard */,
 				5442CF7823450B9D00D438AE /* Assets.xcassets */,
-				5455EB3F235929F600DFDDA1 /* InfoViewController.swift */,
 			);
 			path = "Student Management System";
 			sourceTree = "<group>";

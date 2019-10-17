@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class DataModel {
-    
     enum ObjectType: String, CustomStringConvertible {
         var description: String {
             return self.rawValue
@@ -21,16 +20,6 @@ class DataModel {
         
         static var all = [DataModel.ObjectType.student, .professor, .course]
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

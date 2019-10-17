@@ -19,7 +19,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     let defaultSystemImage = "person.circle.fill"
     var didSetImage = false
     
-    var parent :UIViewController? = nil
+    var parent :InfoViewController? = nil
     
     var objectData = [String:Any]() {
         didSet {
@@ -108,7 +108,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     @objc private func pickImage(_ sender: Any) {
         if parent != nil {
-            parent?.presentImagePicker()
+            parent?.showImagePickerOptions()
         }
     }
     
@@ -286,6 +286,6 @@ extension ObjectInfoView {
     ]
 }
 
-extension UIViewController {
-    @objc func presentImagePicker() {}
-}
+//extension UIViewController {
+//    @objc func presentImagePicker() {}
+//}
