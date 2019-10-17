@@ -8,8 +8,8 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="String"/>
-        <relationship name="enrolledBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="enrolledIn" inverseEntity="Student"/>
-        <relationship name="instructedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Professor" inverseName="instruct" inverseEntity="Professor"/>
+        <relationship name="enrolledBy" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Student" inverseName="enrolledIn" inverseEntity="Student"/>
+        <relationship name="instructedBy" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Professor" inverseName="instruct" inverseEntity="Professor"/>
     </entity>
     <entity name="Professor" representedClassName="Professor" syncable="YES" codeGenerationType="class">
         <attribute name="descriptionID" optional="YES" attributeType="String"/>
@@ -19,7 +19,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="officeAddress" optional="YES" attributeType="String"/>
         <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <relationship name="instruct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="instructedBy" inverseEntity="Course"/>
+        <relationship name="instruct" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Course" inverseName="instructedBy" inverseEntity="Course"/>
     </entity>
     <entity name="Student" representedClassName="Student" syncable="YES" codeGenerationType="class">
         <attribute name="campusAddress" optional="YES" attributeType="String"/>
@@ -30,7 +30,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="phone" optional="YES" attributeType="String"/>
         <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <relationship name="enrolledIn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="enrolledBy" inverseEntity="Course"/>
+        <relationship name="enrolledIn" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Course" inverseName="enrolledBy" inverseEntity="Course"/>
     </entity>
     <elements>
         <element name="Course" positionX="-657.73828125" positionY="-373.61328125" width="128" height="178"/>

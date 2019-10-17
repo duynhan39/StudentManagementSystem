@@ -22,7 +22,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     var objectData = [String:Any]() {
         didSet {
-            refresh()
+            updateProperties()
             showProfilePicture()
         }
     }
@@ -54,7 +54,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     var viewMode = ObjectInfoView.ViewMode.add {
         didSet {
-            refresh()
+            updateProperties()
         }
     }
     
@@ -70,7 +70,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     fileprivate func refresh() {
         setNeedsLayout()
         setNeedsDisplay()
-        attributeTable.reloadData()
+        updateProperties()
     }
     
     // MARK: - Init
@@ -107,18 +107,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     @objc private func pickImage(_ sender: Any) {
         if parent != nil {
-//            print("Cool")
             parent?.presentImagePicker()
-        } else {
-            print("Not cool")
-//            let pickerController = UIImagePickerController()
-//            pickerController.sourceType = .camera
-//            pickerController.allowsEditing = true
-//
-//            if parent != nil {
-//                pickerController.delegate = parent! as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
-//                parent!.present(pickerController, animated: true)
-//            }
         }
     }
     
@@ -154,6 +143,11 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     // MARK: - Draw
     
+    private func updateProperties() {
+        attributeTable.reloadData()
+        attributeTable.isUserInteractionEnabled = isEditable
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsLayout()
         setNeedsDisplay()
@@ -165,7 +159,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         
         let displayGap : CGFloat = 15
         var currentAvaiY : CGFloat = displayGap
-        
         
         // MARK: Name label
         
@@ -227,7 +220,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         
         cell.labelName = attName
         cell.viewMode = viewMode
-        cell.attributeInputTextField.isUserInteractionEnabled = isEditable
+//        cell.attributeInputTextField.isUserInteractionEnabled = isEditable
         
         var textFieldContent : String
         switch viewMode {

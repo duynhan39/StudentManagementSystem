@@ -46,13 +46,13 @@ class TabBarViewController: UITabBarController {
         editButtonItem.target = self
         navigationItem.leftBarButtonItem = editButton
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewRow(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentCreateObjectView(_:)))
         navigationItem.rightBarButtonItem = addButton
     }
     
     
     // MARK: Functional features
-    @objc private func insertNewRow(_ sender: Any) {
+    @objc private func presentCreateObjectView(_ sender: Any) {
         turnOffEditMode()
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newAddObjectController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
