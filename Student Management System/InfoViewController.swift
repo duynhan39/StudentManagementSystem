@@ -15,6 +15,11 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let a = Student()
+        
+//        a.set
+        
     }
     
     func showImagePickerOptions() {
@@ -39,11 +44,13 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
         pickerController.delegate = self
         pickerController.allowsEditing = true
         
-        
         if imagePickerSourceType == .camera && UIImagePickerController.isSourceTypeAvailable(.camera) {
             pickerController.sourceType = .camera
         } else if  UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             pickerController.sourceType = .photoLibrary
+        } else {
+            // None available
+            return
         }
     
         self.present(pickerController, animated: true)
@@ -60,6 +67,34 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
     
     func updateProfile(with image: UIImage) {}
+    
+    func save<T: NSManagedObject>(data: [String:Any], to object: T?) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let targetedObject : T = object ?? T(context: context)
+
+//        let data = objectInfoView.getInputedData()
+//        for key in data.keys {
+//            targetedObject.setValue(data[key], forKey: key)
+//        }
+        
+        targetedObject.setValuesForKeys(data)
+        targetedObject.setValue(targetedObject.description, forKey: "descriptionID")
+        print(targetedObject.description)
+        
+        // Save the context.
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
 
 
 }
