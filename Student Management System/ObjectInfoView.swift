@@ -21,7 +21,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     let defaultSystemImage = "person.circle.fill"
     var didSetImage = false
     
-    var parent :InfoViewController? = nil
+    var parent :GenericInfoViewController? = nil
     
     var objectData = [String:Any]() {
         didSet {
@@ -34,7 +34,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         switch viewTarget {
         case .info:
             return attributeNames
-        default:
+        case .relation:
             switch objectType {
             case .student:
                 return objectData["enrolledIn"] as? [Any] ?? [Any]()
@@ -125,7 +125,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         
         tableView.dataSource = self
         tableView.register(InfoCell.self, forCellReuseIdentifier: "infoCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "relationCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ralationCell")
         
         tableView.bounces = false
         tableView.allowsSelection =  false
@@ -190,7 +190,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     
     // MARK: - Display
-    fileprivate func refresh() {
+    func refresh() {
         setNeedsLayout()
         setNeedsDisplay()
         updateProperties()
@@ -301,6 +301,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(tableContent.count)
         return tableContent.count
     }
     
@@ -334,6 +335,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     private func setUpRelationCell(at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ralationCell", for: indexPath)
+        cell.textLabel?.text = "\(tableContent[indexPath.row])"
         return cell
     }
     

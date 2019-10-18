@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class InfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class GenericInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var imagePickerSourceType = UIImagePickerController.SourceType.camera
     
@@ -70,11 +70,6 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
         let context = appDelegate.persistentContainer.viewContext
         
         let targetedObject : T = object ?? T(context: context)
-
-//        let data = objectInfoView.getInputedData()
-//        for key in data.keys {
-//            targetedObject.setValue(data[key], forKey: key)
-//        }
         
         targetedObject.setValuesForKeys(data)
         targetedObject.setValue(targetedObject.description, forKey: "descriptionID")

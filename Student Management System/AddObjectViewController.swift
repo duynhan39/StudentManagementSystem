@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddObjectViewController: InfoViewController {
+class AddObjectViewController: GenericInfoViewController {
     
     // MARK: Valiables
     @IBOutlet weak var objectInfoView: ObjectInfoView!

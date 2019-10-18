@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: InfoViewController {
+class DetailViewController: GenericInfoViewController {
 
     @IBOutlet weak var objectInfoView: ObjectInfoView!
     
@@ -65,15 +65,28 @@ class DetailViewController: InfoViewController {
         navigationItem.rightBarButtonItem?.title = buttonTitle
     }
     
-    private func passData() {
-        var data = [String:Any]()
-        let attributesByName = object?.entity.attributesByName ?? [String:Any]()
-        
-        for (key, _) in attributesByName {
-            data[key] = object?.value(forKey: key)
-        }
-
+    func passData() {
         if objectInfoView != nil {
+            var data = [String:Any]()
+            let attributesByName = object?.entity.attributesByName ?? [String:Any]()
+            let relationshipsByName = object?.entity.relationshipsByName ?? [String:Any]()
+            
+            for (key, _) in attributesByName {
+                data[key] = object?.value(forKey: key)
+            }
+            
+            for (key, _) in relationshipsByName {
+                data[key] = (object?.value(forKey: key) as? NSOrderedSet)?.array
+            }
+            
+//            let a = object?.value(forKey: "enrolledIn")
+//            let b = Student()
+//            let c = b.enrolledIn
+            
+            
+            print(object?.value(forKey: "enrolledIn"))
+            print(data["enrolledIn"])
+        
             objectInfoView.objectData = data
         }
     }
@@ -87,11 +100,12 @@ class DetailViewController: InfoViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyBoard.instantiateViewController(withIdentifier: "SelectObjectController") as! SelectObjectController
 
+        newController.callerController = self
         newController.objectType = objectType
         
         newController.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         newController.object = self.object
-        parent?.present(newController, animated: true, completion: nil)
+        self.present(newController, animated: true, completion: nil)
     }
 
 
