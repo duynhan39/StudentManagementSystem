@@ -31,15 +31,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sNN-eA-Cu0" customClass="ObjectInfoView" customModule="Student_Management_System" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="759"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNN-eA-Cu0" customClass="ObjectInfoView" customModule="Student_Management_System" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="sNN-eA-Cu0" secondAttribute="trailing" id="SfR-eo-qfL"/>
-                            <constraint firstItem="sNN-eA-Cu0" firstAttribute="bottom" secondItem="VUw-jc-0yf" secondAttribute="bottom" constant="34" id="VgO-y0-kuX"/>
                             <constraint firstItem="sNN-eA-Cu0" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="jqZ-Le-yeD"/>
                             <constraint firstItem="sNN-eA-Cu0" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="xt5-dg-P6a"/>
                         </constraints>
@@ -123,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFP-zb-LVq" customClass="ObjectInfoView" customModule="Student_Management_System" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="93" width="414" height="803"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="769"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJe-OP-wzH">
                                 <rect key="frame" x="359" y="52" width="40" height="33"/>
@@ -137,7 +136,7 @@
                                 <rect key="frame" x="15" y="52" width="53" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Cancel">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelAction:" destination="5Yt-ei-UlL" eventType="touchUpInside" id="zNR-kX-yhQ"/>
@@ -151,7 +150,7 @@
                             <constraint firstItem="qFP-zb-LVq" firstAttribute="leading" secondItem="iLw-d8-ud5" secondAttribute="leading" id="RTV-Jw-SrU"/>
                             <constraint firstItem="iLw-d8-ud5" firstAttribute="trailing" secondItem="qFP-zb-LVq" secondAttribute="trailing" id="dMP-rT-GA9"/>
                             <constraint firstItem="YJe-OP-wzH" firstAttribute="top" secondItem="iLw-d8-ud5" secondAttribute="top" constant="8" id="h8u-Vy-Rnj"/>
-                            <constraint firstItem="qFP-zb-LVq" firstAttribute="bottom" secondItem="iLw-d8-ud5" secondAttribute="bottom" constant="34" id="kJv-ev-sUe"/>
+                            <constraint firstItem="qFP-zb-LVq" firstAttribute="bottom" secondItem="iLw-d8-ud5" secondAttribute="bottom" id="kJv-ev-sUe"/>
                             <constraint firstItem="iLw-d8-ud5" firstAttribute="trailing" secondItem="YJe-OP-wzH" secondAttribute="trailing" constant="15" id="wHZ-pZ-Ogw"/>
                             <constraint firstItem="x8d-qY-ObO" firstAttribute="leading" secondItem="iLw-d8-ud5" secondAttribute="leading" constant="15" id="wN5-LY-Vy8"/>
                         </constraints>
@@ -229,7 +228,7 @@
                                 <rect key="frame" x="15" y="52" width="53" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Cancel">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelSelection:" destination="7mC-Si-PUB" eventType="touchUpInside" id="BEa-AM-4pL"/>

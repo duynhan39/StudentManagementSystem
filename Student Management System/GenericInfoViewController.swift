@@ -16,8 +16,43 @@ class GenericInfoViewController: UIViewController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardNotification(notification:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func getBottomConstraint() -> NSLayoutConstraint? {
+        return nil
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+    if let userInfo = notification.userInfo {
+        let key = UIResponder.keyboardFrameEndUserInfoKey
+        let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        let endFrameY = endFrame?.origin.y ?? 0
+        let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+        let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+        
+        
+        if endFrameY >= UIScreen.main.bounds.size.height {
+            self.getBottomConstraint()?.constant = 0.0
+        } else {
+            self.getBottomConstraint()?.constant = endFrame?.size.height ?? 0.0
+        }
+        UIView.animate(withDuration: duration,
+                                   delay: TimeInterval(0),
+                                   options: animationCurve,
+                                   animations: { self.view.layoutIfNeeded() },
+                                   completion: nil)
+        }
+        
     }
     
 //    @objc func keyboardWillShow(notification: NSNotification) {

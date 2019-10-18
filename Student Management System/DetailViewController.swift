@@ -11,7 +11,11 @@ import CoreData
 
 class DetailViewController: GenericInfoViewController {
 
+    // MARK: Variables
     @IBOutlet weak var objectInfoView: ObjectInfoView!
+    
+//    @IBOutlet weak
+    var bottomViewConstraint: NSLayoutConstraint? = nil
     
     var objectType = DataModel.ObjectType.student {
         didSet {
@@ -26,7 +30,13 @@ class DetailViewController: GenericInfoViewController {
             passData()
         }
     }
+    
+    override func getBottomConstraint() -> NSLayoutConstraint? {
+        return bottomViewConstraint
+    }
+    
 
+    // MARK: Load view
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
@@ -43,6 +53,10 @@ class DetailViewController: GenericInfoViewController {
         objectInfoView.viewMode = .view
         objectInfoView.objectType = self.objectType
         objectInfoView.parent = self
+//        objectInfoView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        bottomViewConstraint = objectInfoView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        bottomViewConstraint?.isActive = true
+        
         passData()
     }
     
