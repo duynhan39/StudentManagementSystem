@@ -203,7 +203,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     private func updateProperties() {
         tableView.reloadData()
-//        tableView.isUserInteractionEnabled = isEditable
+        tableView.isUserInteractionEnabled = isEditable
         profileImageView.isUserInteractionEnabled = isEditable
         
         if viewMode == .view {
@@ -312,8 +312,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         let attName : String = attributeNames[indexPath.row]
         cell.labelName = attName
         cell.viewMode = viewMode
-        
-        cell.isUserInteractionEnabled = isEditable
         
         var textFieldContent : String
         switch viewMode {
