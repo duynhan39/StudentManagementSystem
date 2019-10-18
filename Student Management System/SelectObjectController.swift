@@ -21,6 +21,7 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
         didSet {
             if tableView != nil {
                 tableView.reloadData()
+                selectIncludedObjects()
             }
         }
     }
@@ -35,6 +36,16 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        selectIncludedObjects()
+    }
+    
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        selectIncludedObjects()
+//    }
+    
     
     @IBAction func saveSelection(_ sender: Any) {
         if callerController != nil {
@@ -44,16 +55,16 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
             }
             let context = appDelegate.persistentContainer.viewContext
             
-            let selectedIndexPaths = tableView.indexPathsForSelectedRows
-            var selectedObject = [NSManagedObject]()
             
+            let key = DataModel.relation(of: callerController!.objectType)
+            var selectedObject = [NSManagedObject]()
+//            selectedObject = (object?.value(forKey: key) as? NSOrderedSet)?.array as? [NSManagedObject] ?? [NSManagedObject]()
+            let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths ?? [] {
                 selectedObject += [fetchedResultsController.object(at: indexPath)]
             }
             
-//            print(objectType)
-//            print(SelectObjectController.relation(of: objectType))
-            object?.setValue(NSOrderedSet(array: selectedObject), forKey: DataModel.relation(of: callerController!.objectType))
+            object?.setValue(NSOrderedSet(array: selectedObject), forKey: key)
             
             // Save the context.
             do {
@@ -77,6 +88,23 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
     
     // MARK: Table View
     
+    func selectIncludedObjects() {
+        for cell in tableView.visibleCells {
+            let indexPath = tableView.indexPath(for: cell)!
+            let thisObject = fetchedResultsController.object(at: indexPath)
+            
+            if callerController != nil && object != nil {
+                let key = DataModel.relation(of: objectType)
+                if let list = ((thisObject.value(forKey: key) as? NSOrderedSet)?.array as? [NSManagedObject]) {
+                    if list.contains(object!) {
+                        print("YAY")
+                        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+                    }
+                }
+            }
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
@@ -88,8 +116,20 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, with: object)
+        let thisObject = fetchedResultsController.object(at: indexPath)
+//
+//        if callerController != nil && object != nil {
+//            let key = DataModel.relation(of: objectType)
+//            if let list = ((thisObject.value(forKey: key) as? NSOrderedSet)?.array as? [NSManagedObject]) {
+//                if list.contains(object!) {
+//                    print("YAY")
+//                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+//                }
+//            }
+//        }
+//
+//
+        configureCell(cell, with: thisObject)
         return cell
     }
     

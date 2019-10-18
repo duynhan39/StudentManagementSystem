@@ -77,12 +77,6 @@ class DetailViewController: GenericInfoViewController {
             for (key, _) in relationshipsByName {
                 data[key] = (object?.value(forKey: key) as? NSOrderedSet)?.array
             }
-            
-//            let a = object?.value(forKey: "enrolledIn")
-//            let b = Student()
-//            let c = b.enrolledIn
-//            print(object?.value(forKey: "enrolledIn"))
-//            print(data["enrolledIn"])
         
             objectInfoView.objectData = data
         }
@@ -102,6 +96,7 @@ class DetailViewController: GenericInfoViewController {
         
         newController.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         newController.object = self.object
+        
         self.present(newController, animated: true, completion: nil)
     }
 
