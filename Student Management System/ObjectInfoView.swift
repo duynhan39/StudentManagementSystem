@@ -153,7 +153,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         case .student, .professor:
             targetObjectType = .course
         case .course:
-            targetObjectType = .professor
+            targetObjectType = .student
         }
         
         parent?.presentObjectPicker(with: targetObjectType)
