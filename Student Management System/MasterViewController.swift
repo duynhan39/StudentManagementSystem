@@ -165,9 +165,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! NSManagedObject)
+                configureCell(tableView.cellForRow(at: indexPath!) ?? UITableViewCell(), with: anObject as? NSManagedObject ?? NSManagedObject())
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, with: anObject as! NSManagedObject)
+                configureCell(tableView.cellForRow(at: indexPath!) ?? UITableViewCell(), with: anObject as? NSManagedObject ?? NSManagedObject())
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
             default:
                 return
@@ -177,15 +177,5 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         tableView.reloadData()
-     }
-     */
-
 }
 

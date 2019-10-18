@@ -41,12 +41,6 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
         selectIncludedObjects()
     }
     
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        selectIncludedObjects()
-//    }
-    
-    
     @IBAction func saveSelection(_ sender: Any) {
         if callerController != nil {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -58,7 +52,6 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
             
             let key = DataModel.relation(of: callerController!.objectType)
             var selectedObject = [NSManagedObject]()
-//            selectedObject = (object?.value(forKey: key) as? NSOrderedSet)?.array as? [NSManagedObject] ?? [NSManagedObject]()
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths ?? [] {
                 selectedObject += [fetchedResultsController.object(at: indexPath)]
@@ -117,18 +110,6 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let thisObject = fetchedResultsController.object(at: indexPath)
-//
-//        if callerController != nil && object != nil {
-//            let key = DataModel.relation(of: objectType)
-//            if let list = ((thisObject.value(forKey: key) as? NSOrderedSet)?.array as? [NSManagedObject]) {
-//                if list.contains(object!) {
-//                    print("YAY")
-//                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-//                }
-//            }
-//        }
-//
-//
         configureCell(cell, with: thisObject)
         return cell
     }
@@ -183,20 +164,7 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
         _fetchedResultsController = (aFetchedResultsController as! NSFetchedResultsController<NSManagedObject>)
     }
     
-    
     var _fetchedResultsController: NSFetchedResultsController<NSManagedObject>? = nil
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

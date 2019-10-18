@@ -39,6 +39,9 @@ class InfoCell: UITableViewCell {
     var labelName = "" {
         didSet {
             attributeNameLabel.text = labelName
+            attributeInputTextField.placeholder = placeHolderText
+            attributeInputTextField.autocapitalizationType = autoCapStyle(of: labelName)
+            attributeInputTextField.keyboardType = keyboardType(of: labelName)
         }
     }
     
@@ -88,6 +91,8 @@ class InfoCell: UITableViewCell {
                                        width: self.frame.width-2*gap,
                                        height: height*2,
                                        enableInsets: false)
+        
+        attributeInputTextField.autocorrectionType = .no
     }
     
 //    override func awakeFromNib() {
@@ -101,15 +106,41 @@ class InfoCell: UITableViewCell {
 //    }
     
     // MARK: Draw
-    override func draw(_ rect: CGRect) {
-        attributeInputTextField.placeholder = placeHolderText
-    }
+//    override func draw(_ rect: CGRect) {
+//    }
     
 }
 
 // MARK: Extensions
 
 extension InfoCell {
+    
+    private func autoCapStyle(of attribute: String) ->  UITextAutocapitalizationType {
+        switch attribute {
+        case "First name", "Last name", "Meeting days", "Location", "Home address", "Office address", "Campus address":
+            return .words
+        case "Time", "Department code":
+            return .allCharacters
+        case "Course name":
+            return .sentences
+        default:
+            return .none
+        }
+    }
+    
+    private func keyboardType(of attribute: String) -> UIKeyboardType {
+        switch attribute {
+        case "Phone number":
+            return .phonePad
+        case "Email":
+            return .emailAddress
+        case "Student ID":
+            return .namePhonePad
+        default:
+            return .default
+        }
+    }
+    
     private func convertPlaceHolderString(from text: String) -> String {
         var actualValue = ""
         

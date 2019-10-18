@@ -203,7 +203,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     private func updateProperties() {
         tableView.reloadData()
-        tableView.isUserInteractionEnabled = isEditable
+//        tableView.isUserInteractionEnabled = isEditable
         profileImageView.isUserInteractionEnabled = isEditable
         
         if viewMode == .view {
@@ -313,6 +313,8 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         cell.labelName = attName
         cell.viewMode = viewMode
         
+        cell.isUserInteractionEnabled = isEditable
+        
         var textFieldContent : String
         switch viewMode {
         case .edit, .view:
@@ -330,18 +332,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         cell.textLabel?.text = "\(tableContent[indexPath.row])"
         return cell
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
 }
 
 // MARK: - Extension
@@ -368,7 +358,7 @@ extension ObjectInfoView {
                          "Home address" : "homeAddress",
                          "Office address" : "officeAddress"],
         
-        "Course" :      ["Department Code" : "departmentCode",
+        "Course" :      ["Department code" : "departmentCode",
                          "Course number" : "number",
                          "Course name" : "name",
                          "Meeting days" : "meetingDay",
@@ -379,7 +369,7 @@ extension ObjectInfoView {
     static let AttributeNames = [
         "Student" : ["First name", "Last name", "Email", "Student ID", "Phone number", "Campus address"],
         "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"],
-        "Course" : ["Department Code", "Course number", "Course name", "Meeting days", "Time", "Location"]
+        "Course" : ["Department code", "Course number", "Course name", "Meeting days", "Time", "Location"]
     ]
 }
 
