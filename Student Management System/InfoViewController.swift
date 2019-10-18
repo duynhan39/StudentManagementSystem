@@ -15,11 +15,6 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let a = Student()
-        
-//        a.set
-        
     }
     
     func showImagePickerOptions() {
@@ -83,7 +78,6 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         targetedObject.setValuesForKeys(data)
         targetedObject.setValue(targetedObject.description, forKey: "descriptionID")
-        print(targetedObject.description)
         
         // Save the context.
         do {

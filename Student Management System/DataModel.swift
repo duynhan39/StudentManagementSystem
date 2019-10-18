@@ -37,7 +37,11 @@ extension Professor {
 
 extension Course {
     override public var description: String {
-        return "\(self.departmentCode ?? "")\(self.number ?? "") - \(self.name ?? "")"
+        var des = "\(self.departmentCode ?? "")\(self.number ?? "")"
+        if self.name != nil && self.name != "" {
+            des += " - \(self.name!)"
+        }
+        return des
     }
 }
 

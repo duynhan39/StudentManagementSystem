@@ -12,9 +12,11 @@ import UIKit
 class ObjectInfoView: UIView, UITableViewDataSource  {
     
     // MARK: - Variables
-    private var attributeTable = UITableView()
+    private var tableView = UITableView()
     var profileImageView = UIImageView()
     private var viewLabel = UILabel()
+    private var segmentedSwitch = UISegmentedControl(items: ["Info", "Courses"])
+    private var addRelationButton = UIButton()
     
     let defaultSystemImage = "person.circle.fill"
     var didSetImage = false
@@ -25,6 +27,23 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         didSet {
             updateProperties()
             showProfilePicture()
+        }
+    }
+    
+    var tableContent : [Any] {
+        switch viewTarget {
+        case .info:
+            return attributeNames
+        default:
+            switch objectType {
+            case .student:
+                return objectData["enrolledIn"] as? [Any] ?? [Any]()
+            case .professor:
+                return [Any]()
+            case .course:
+                return [Any]()
+            }
+            
         }
     }
     
@@ -59,6 +78,18 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         }
     }
     
+    var viewTarget = ObjectInfoView.ViewTarget.info {
+        didSet {
+            tableView.reloadData()
+            switch viewTarget {
+            case .info:
+                addRelationButton.isHidden = true
+            case .relation:
+                addRelationButton.isHidden = false
+            }
+        }
+    }
+    
     var isEditable : Bool {
         switch viewMode {
         case .view:
@@ -66,12 +97,6 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         case .add, .edit:
             return true
         }
-    }
-    
-    fileprivate func refresh() {
-        setNeedsLayout()
-        setNeedsDisplay()
-        updateProperties()
     }
     
     // MARK: - Init
@@ -89,19 +114,31 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         objectType = DataModel.ObjectType.student
         
         addSubview(profileImageView)
-        addSubview(attributeTable)
+        addSubview(tableView)
         addSubview(viewLabel)
+        addSubview(segmentedSwitch)
+        addSubview(addRelationButton)
         
         let tapGuesture = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
         profileImageView.addGestureRecognizer(tapGuesture)
         profileImageView.image = UIImage(systemName: defaultSystemImage)
         
-        attributeTable.dataSource = self
-        attributeTable.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
-        attributeTable.bounces = false
-        attributeTable.allowsSelection =  false
+        tableView.dataSource = self
+        tableView.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
+        tableView.bounces = false
+        tableView.allowsSelection =  false
+//        tableView.isEditing = true
         
         viewLabel.textAlignment = .center
+        
+        segmentedSwitch.selectedSegmentIndex = 0
+        segmentedSwitch.addTarget(self, action: #selector(changeTargetView(_:)), for: .valueChanged)
+        
+        addRelationButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        addRelationButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .highlighted)
+        addRelationButton.isHidden = true
+        addRelationButton.addTarget(self, action: #selector(openObjectPicker(_:)), for: .touchUpInside)
+        
     }
     
     // MARK: Functional features
@@ -110,6 +147,43 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         if parent != nil {
             parent?.showImagePickerOptions()
         }
+    }
+    
+    @objc private func changeTargetView(_ sender: Any) {
+        viewTarget = ObjectInfoView.ViewTarget(rawValue: segmentedSwitch.selectedSegmentIndex) ?? .info
+    }
+    
+    @objc private func openObjectPicker(_ sender: Any) {
+
+    }
+    
+    // MARK: - Retrieve Data
+    func getInputedData() -> [String:Any] {
+        let attributeIds : [String:String] = ObjectInfoView.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
+        var data = [String:Any]()
+        for i in 0..<attributeNames.count {
+            let attName = attributeNames[i]
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) as? InfoCell {
+                let attVal : String = cell.attributeInputTextField.text ?? ""
+                data[attributeIds[attName] ?? "None"] = attVal
+            }
+        }
+        
+        if didSetImage {
+            data["photo"] = profileImageView.image?.pngData()
+        }
+        
+        objectData = data
+        return data
+    }
+    
+    
+    // MARK: - Display
+    fileprivate func refresh() {
+        setNeedsLayout()
+        setNeedsDisplay()
+        updateProperties()
     }
     
     func showProfilePicture() {
@@ -125,34 +199,23 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         }
     }
     
-    // MARK: - Retrieve Data
-    func getInputedData() -> [String:Any] {
-        let attributeIds : [String:String] = ObjectInfoView.AttributeDecodedValue[self.objectType.rawValue] ?? ["":""]
-        var data = [String:Any]()
-        for i in 0..<attributeNames.count {
-            let attName = attributeNames[i]
-            let indexPath = IndexPath(row: i, section: 0)
-            if let cell = attributeTable.cellForRow(at: indexPath) as? InfoCell {
-                let attVal : String = cell.attributeInputTextField.text ?? ""
-                data[attributeIds[attName] ?? "None"] = attVal
-            }
-        }
-        
-        if didSetImage {
-            data["photo"] = profileImageView.image?.pngData()
-        }
-        
-        objectData = data
-        return data
-    }
-    
-    
-    // MARK: - Draw
-    
     private func updateProperties() {
-        attributeTable.reloadData()
-        attributeTable.isUserInteractionEnabled = isEditable
+        tableView.reloadData()
+        tableView.isUserInteractionEnabled = isEditable
         profileImageView.isUserInteractionEnabled = isEditable
+        
+        if viewMode == .view {
+            segmentedSwitch.isHidden = false
+        } else {
+            segmentedSwitch.isHidden = true
+        }
+        
+        switch objectType {
+        case .student, .professor:
+            segmentedSwitch.setTitle("Courses", forSegmentAt: 1)
+        case .course:
+            segmentedSwitch.setTitle("People", forSegmentAt: 1)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -162,7 +225,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     override func draw(_ rect: CGRect) {
         clearsContextBeforeDrawing = true
-        attributeTable.separatorStyle = .none
+        tableView.separatorStyle = .none
         
         let displayGap : CGFloat = 15
         var currentAvaiY : CGFloat = displayGap
@@ -196,6 +259,20 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             currentAvaiY = profilePicFrame.maxY + displayGap
         }
         
+        // MARK: Segmented Control
+        
+        let segmentHeight : CGFloat = segmentedSwitch.frame.height
+        segmentedSwitch.center = CGPoint(x: self.frame.width/2, y: currentAvaiY+segmentHeight/2)
+        
+        // MARK: Add relation button
+        
+        addRelationButton.frame = CGRect(x: self.frame.width - segmentHeight, y: currentAvaiY, width: segmentHeight, height: segmentHeight)
+//         = addRelaButtonFrame
+        
+        if viewMode == .view || viewMode == .edit {
+            currentAvaiY = segmentedSwitch.frame.maxY + displayGap
+        }
+        
         // MARK: Attribute table
         let tableHeight = self.frame.height - currentAvaiY
         let tableFrame = CGRect(x: 0,
@@ -203,39 +280,63 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
                                 width: self.frame.width,
                                 height: tableHeight)
         
-        attributeTable.frame = tableFrame
+        tableView.frame = tableFrame
         
         let indexPath = IndexPath(row: 0, section: 0)
-        if attributeTable.numberOfRows(inSection: 0) > 0 {
-            attributeTable.scrollToRow(at: indexPath, at: .top, animated: false)
+        if tableView.numberOfRows(inSection: 0) > 0 {
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         }
     }
     
     // MARK: - Table View
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attributeNames.count
+        return tableContent.count
     }
     
     // MARK: Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let attName : String = attributeNames[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! InfoCell
         
+        switch viewTarget {
+        case .info:
+            setUpAttribute(for: cell, at: indexPath.row)
+        case .relation:
+            setUpRelation(for: cell, at: indexPath.row)
+        }
+        
+        return cell
+    }
+    
+    private func setUpAttribute(for cell: InfoCell, at index: Int){
+        let attName : String = attributeNames[index]
         cell.labelName = attName
         cell.viewMode = viewMode
         
         var textFieldContent : String
         switch viewMode {
         case .edit, .view:
-            textFieldContent = (objectData[ObjectInfoView.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
+            let keyDict = ObjectInfoView.AttributeDecodedValue[objectType.description]
+            textFieldContent = (objectData[keyDict?[attName] ?? ""] as? String) ?? ""
         default:
             textFieldContent = ""
         }
         cell.attributeInputTextField.text = textFieldContent
-        
-        return cell
+    }
+    
+    private func setUpRelation(for cell: InfoCell, at index: Int){
+//        let attName : String = attributeNames[index]
+//        cell.labelName = attName
+//        cell.viewMode = viewMode
+//
+//        var textFieldContent : String
+//        switch viewMode {
+//        case .edit, .view:
+//            textFieldContent = (objectData[ObjectInfoView.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
+//        default:
+//            textFieldContent = ""
+//        }
+//        cell.attributeInputTextField.text = textFieldContent
     }
     
     /*
@@ -254,7 +355,11 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
 // MARK: - Extension
 extension ObjectInfoView {
     enum ViewMode: Int {
-        case add, edit, view
+        case add = 0, edit, view
+    }
+    
+    enum ViewTarget: Int {
+        case info = 0, relation
     }
     
     static let AttributeDecodedValue : [String : [String:String]] = [
