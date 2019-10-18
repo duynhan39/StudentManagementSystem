@@ -358,7 +358,7 @@ extension ObjectInfoView {
                          "Home address" : "homeAddress",
                          "Office address" : "officeAddress"],
         
-        "Course" :      ["Department code" : "departmentCode",
+        "Course" :      ["Department Code" : "departmentCode",
                          "Course number" : "number",
                          "Course name" : "name",
                          "Meeting days" : "meetingDay",
@@ -369,7 +369,7 @@ extension ObjectInfoView {
     static let AttributeNames = [
         "Student" : ["First name", "Last name", "Email", "Student ID", "Phone number", "Campus address"],
         "Professor" : ["First name", "Last name", "Email", "Home address", "Office address"],
-        "Course" : ["Department code", "Course number", "Course name", "Meeting days", "Time", "Location"]
+        "Course" : ["Department Code", "Course number", "Course name", "Meeting days", "Time", "Location"]
     ]
 }
 
