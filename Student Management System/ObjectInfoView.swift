@@ -76,8 +76,10 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             switch viewTarget {
             case .info:
                 addRelationButton.isHidden = true
+                parent?.navigationItem.rightBarButtonItem?.isEnabled = true
             case .relation:
                 addRelationButton.isHidden = false
+                parent?.navigationItem.rightBarButtonItem?.isEnabled = false
             }
         }
     }
