@@ -56,7 +56,6 @@ class DetailViewController: GenericInfoViewController {
             buttonTitle = "Done"
         } else {
             // Just hit [Done]
-            
             save(data: objectInfoView.getInputedData(), to: object)
             
             objectInfoView.viewMode = .view
@@ -82,10 +81,8 @@ class DetailViewController: GenericInfoViewController {
 //            let a = object?.value(forKey: "enrolledIn")
 //            let b = Student()
 //            let c = b.enrolledIn
-            
-            
-            print(object?.value(forKey: "enrolledIn"))
-            print(data["enrolledIn"])
+//            print(object?.value(forKey: "enrolledIn"))
+//            print(data["enrolledIn"])
         
             objectInfoView.objectData = data
         }

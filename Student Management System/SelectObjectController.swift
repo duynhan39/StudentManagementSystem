@@ -37,52 +37,43 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
     
     
     @IBAction func saveSelection(_ sender: Any) {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            //            self.dismiss(animated: true, completion: nil)
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let selectedIndexPaths = tableView.indexPathsForSelectedRows
-        var selectedObject = [NSManagedObject]()
-        
-        for indexPath in selectedIndexPaths ?? [] {
-            selectedObject += [fetchedResultsController.object(at: indexPath)]
-            
-            print("\(selectedObject[selectedObject.count - 1])")
-        }
-        
-        object?.setValue(NSOrderedSet(array: selectedObject), forKey: "enrolledIn")
-        
-        print(object?.value(forKey: "enrolledIn"))
-        print(object?.value(forKey: "firstName"))
-        
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
         if callerController != nil {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                //            self.dismiss(animated: true, completion: nil)
+                return
+            }
+            let context = appDelegate.persistentContainer.viewContext
+            
+            let selectedIndexPaths = tableView.indexPathsForSelectedRows
+            var selectedObject = [NSManagedObject]()
+            
+            for indexPath in selectedIndexPaths ?? [] {
+                selectedObject += [fetchedResultsController.object(at: indexPath)]
+            }
+            
+//            print(objectType)
+//            print(SelectObjectController.relation(of: objectType))
+            object?.setValue(NSOrderedSet(array: selectedObject), forKey: DataModel.relation(of: callerController!.objectType))
+            
+            // Save the context.
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            
             callerController!.passData()
         }
         
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
     @IBAction func cancelSelection(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
     
     // MARK: Table View
     
@@ -167,4 +158,19 @@ class SelectObjectController: UIViewController, UITableViewDataSource, NSFetched
     }
     */
 
+}
+
+extension DataModel {
+    static func relation(of type: DataModel.ObjectType) -> String{
+        var str = ""
+        switch type {
+        case .student:
+            str = "enrolledIn"
+        case .professor:
+            str = "instruct"
+        case .course:
+            str = "enrolledBy"
+        }
+        return str
+    }
 }

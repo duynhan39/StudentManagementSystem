@@ -35,15 +35,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         case .info:
             return attributeNames
         case .relation:
-            switch objectType {
-            case .student:
-                return objectData["enrolledIn"] as? [Any] ?? [Any]()
-            case .professor:
-                return [Any]()
-            case .course:
-                return [Any]()
-            }
-            
+            return objectData[DataModel.relation(of: objectType)] as? [Any] ?? [Any]()
         }
     }
     
@@ -129,7 +121,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         
         tableView.bounces = false
         tableView.allowsSelection =  false
-//        tableView.isEditing = true
+        //        tableView.isEditing = true
         
         viewLabel.textAlignment = .center
         
@@ -256,9 +248,9 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         if objectType != .course {
             let pictureEdge = min(self.frame.width/3, self.frame.height/5)
             let profilePicFrame = CGRect(x: (self.frame.width - pictureEdge)*0.5,
-                                      y: currentAvaiY,
-                                      width: pictureEdge,
-                                      height: pictureEdge)
+                                         y: currentAvaiY,
+                                         width: pictureEdge,
+                                         height: pictureEdge)
             
             profileImageView.frame = profilePicFrame
             profileImageView.layer.cornerRadius = pictureEdge*0.5
@@ -277,7 +269,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         // MARK: Add relation button
         
         addRelationButton.frame = CGRect(x: self.frame.width - segmentHeight, y: currentAvaiY, width: segmentHeight, height: segmentHeight)
-//         = addRelaButtonFrame
+        //         = addRelaButtonFrame
         
         if viewMode == .view || viewMode == .edit {
             currentAvaiY = segmentedSwitch.frame.maxY + displayGap
@@ -348,7 +340,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
      // Pass the selected object to the new view controller.
      }
      */
-
+    
     
 }
 
