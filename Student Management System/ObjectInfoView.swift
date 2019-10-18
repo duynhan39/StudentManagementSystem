@@ -124,7 +124,9 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         profileImageView.image = UIImage(systemName: defaultSystemImage)
         
         tableView.dataSource = self
-        tableView.register(InfoCell.self, forCellReuseIdentifier: "newInfoCell")
+        tableView.register(InfoCell.self, forCellReuseIdentifier: "infoCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "relationCell")
+        
         tableView.bounces = false
         tableView.allowsSelection =  false
 //        tableView.isEditing = true
@@ -137,7 +139,7 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         addRelationButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         addRelationButton.setImage(UIImage(systemName: "plus.circle.fill"), for: .highlighted)
         addRelationButton.isHidden = true
-        addRelationButton.addTarget(self, action: #selector(openObjectPicker(_:)), for: .touchUpInside)
+        addRelationButton.addTarget(self, action: #selector(pickObjects(_:)), for: .touchUpInside)
         
     }
     
@@ -153,8 +155,16 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
         viewTarget = ObjectInfoView.ViewTarget(rawValue: segmentedSwitch.selectedSegmentIndex) ?? .info
     }
     
-    @objc private func openObjectPicker(_ sender: Any) {
-
+    @objc private func pickObjects(_ sender: Any) {
+        var targetObjectType : DataModel.ObjectType
+        switch objectType {
+        case .student, .professor:
+            targetObjectType = .course
+        case .course:
+            targetObjectType = .professor
+        }
+        
+        parent?.presentObjectPicker(with: targetObjectType)
     }
     
     // MARK: - Retrieve Data
@@ -296,20 +306,17 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
     
     // MARK: Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newInfoCell", for: indexPath) as! InfoCell
-        
         switch viewTarget {
         case .info:
-            setUpAttribute(for: cell, at: indexPath.row)
+            return setUpAttributeCell(at: indexPath)
         case .relation:
-            setUpRelation(for: cell, at: indexPath.row)
+            return setUpRelationCell(at: indexPath)
         }
-        
-        return cell
     }
     
-    private func setUpAttribute(for cell: InfoCell, at index: Int){
-        let attName : String = attributeNames[index]
+    private func setUpAttributeCell(at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as! InfoCell
+        let attName : String = attributeNames[indexPath.row]
         cell.labelName = attName
         cell.viewMode = viewMode
         
@@ -322,21 +329,12 @@ class ObjectInfoView: UIView, UITableViewDataSource  {
             textFieldContent = ""
         }
         cell.attributeInputTextField.text = textFieldContent
+        return cell
     }
     
-    private func setUpRelation(for cell: InfoCell, at index: Int){
-//        let attName : String = attributeNames[index]
-//        cell.labelName = attName
-//        cell.viewMode = viewMode
-//
-//        var textFieldContent : String
-//        switch viewMode {
-//        case .edit, .view:
-//            textFieldContent = (objectData[ObjectInfoView.AttributeDecodedValue[objectType.description]?[attName] ?? ""] as? String) ?? ""
-//        default:
-//            textFieldContent = ""
-//        }
-//        cell.attributeInputTextField.text = textFieldContent
+    private func setUpRelationCell(at indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ralationCell", for: indexPath)
+        return cell
     }
     
     /*

@@ -82,6 +82,18 @@ class DetailViewController: InfoViewController {
         objectInfoView.profileImageView.image = image
         objectInfoView.didSetImage = true
     }
+    
+    override func presentObjectPicker(with objectType: DataModel.ObjectType) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newController = storyBoard.instantiateViewController(withIdentifier: "SelectObjectController") as! SelectObjectController
+
+        newController.objectType = objectType
+        
+        newController.managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+        newController.object = self.object
+        parent?.present(newController, animated: true, completion: nil)
+    }
+
 
 }
 

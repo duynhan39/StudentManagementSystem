@@ -55,10 +55,10 @@ class TabBarViewController: UITabBarController {
     @objc private func presentCreateObjectView(_ sender: Any) {
         turnOffEditMode()
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newAddObjectController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
-        newAddObjectController.objectType = self.objectType
+        let newController = storyBoard.instantiateViewController(withIdentifier: "AddNewObjectViewController") as! AddObjectViewController
+        newController.objectType = self.objectType
         
-        self.present(newAddObjectController, animated: true, completion: nil)
+        self.present(newController, animated: true, completion: nil)
     }
     
     @objc private func switchEditMode(_ sender: Any) {

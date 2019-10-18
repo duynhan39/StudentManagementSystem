@@ -89,6 +89,8 @@ class InfoViewController: UIViewController, UINavigationControllerDelegate, UIIm
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    
+    func presentObjectPicker(with objectType: DataModel.ObjectType) {}
 
 
 }

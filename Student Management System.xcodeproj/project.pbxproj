@@ -21,6 +21,7 @@
 		54B4AF3F2352D8D1003CD70B /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4AF3E2352D8D1003CD70B /* InfoCell.swift */; };
 		54B4AF412353CB74003CD70B /* ObjectInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4AF402353CB74003CD70B /* ObjectInfoView.swift */; };
 		54B4AF452353D721003CD70B /* AddObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B4AF442353D721003CD70B /* AddObjectViewController.swift */; };
+		54E9EAA72359A3770023E710 /* SelectObjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E9EAA62359A3770023E710 /* SelectObjectController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		54B4AF3E2352D8D1003CD70B /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		54B4AF402353CB74003CD70B /* ObjectInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectInfoView.swift; sourceTree = "<group>"; };
 		54B4AF442353D721003CD70B /* AddObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddObjectViewController.swift; sourceTree = "<group>"; };
+		54E9EAA62359A3770023E710 /* SelectObjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				54B4AF442353D721003CD70B /* AddObjectViewController.swift */,
 				54B4AF402353CB74003CD70B /* ObjectInfoView.swift */,
 				54B4AF3E2352D8D1003CD70B /* InfoCell.swift */,
+				54E9EAA62359A3770023E710 /* SelectObjectController.swift */,
 				540D12252352A587007606D9 /* DataModel.swift */,
 				5442CF6C23450B9D00D438AE /* Student_Management_System.xcdatamodeld */,
 				5442CF7D23450B9E00D438AE /* Info.plist */,
@@ -164,6 +167,7 @@
 			files = (
 				540D12262352A587007606D9 /* DataModel.swift in Sources */,
 				5455EB40235929F600DFDDA1 /* InfoViewController.swift in Sources */,
+				54E9EAA72359A3770023E710 /* SelectObjectController.swift in Sources */,
 				54B4AF3F2352D8D1003CD70B /* InfoCell.swift in Sources */,
 				5442CF7223450B9D00D438AE /* MasterViewController.swift in Sources */,
 				5442CF6B23450B9D00D438AE /* AppDelegate.swift in Sources */,

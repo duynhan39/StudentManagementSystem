@@ -29,9 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, UISplitViewControllerDe
         let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
         let tabBarController = masterNavigationController.topViewController as! TabBarViewController
     
+        let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
         for viewController in tabBarController.viewControllers! {
             if viewController.title == "Master" {
-                (viewController as! MasterViewController).managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+                (viewController as! MasterViewController).managedObjectContext = context
             }
         }
     }

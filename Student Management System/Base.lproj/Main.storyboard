@@ -77,11 +77,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="F5Z-fG-zRv">
-                            <rect key="frame" x="0.0" y="103.5" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Arm-wq-HPj" style="IBUITableViewCellStyleDefault" id="WCw-Qf-5nD">
                                 <rect key="frame" x="0.0" y="28" width="414" height="47.5"/>
@@ -213,6 +208,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQ6-jl-hxQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764" y="-851"/>
+        </scene>
+        <!--Select Object Controller-->
+        <scene sceneID="8Vj-p6-6rr">
+            <objects>
+                <viewController storyboardIdentifier="SelectObjectController" id="7mC-Si-PUB" customClass="SelectObjectController" customModule="Student_Management_System" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ILs-uw-CUs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ify-IF-fnq">
+                                <rect key="frame" x="356" y="52" width="43" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="saveSelection:" destination="7mC-Si-PUB" eventType="touchUpInside" id="DcD-yD-Smg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCo-E1-gzw">
+                                <rect key="frame" x="15" y="52" width="53" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelSelection:" destination="7mC-Si-PUB" eventType="touchUpInside" id="BEa-AM-4pL"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ygy-eH-vsh">
+                                <rect key="frame" x="0.0" y="93" width="414" height="803"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="uCo-E1-gzw" firstAttribute="leading" secondItem="B3f-qy-nHb" secondAttribute="leading" constant="15" id="N8a-oD-Yri"/>
+                            <constraint firstItem="uCo-E1-gzw" firstAttribute="top" secondItem="B3f-qy-nHb" secondAttribute="top" constant="8" id="OMt-mn-xS2"/>
+                            <constraint firstItem="Ygy-eH-vsh" firstAttribute="top" secondItem="ify-IF-fnq" secondAttribute="bottom" constant="8" symbolic="YES" id="bWQ-If-n7V"/>
+                            <constraint firstItem="ify-IF-fnq" firstAttribute="top" secondItem="B3f-qy-nHb" secondAttribute="top" constant="8" id="cuu-mh-Iod"/>
+                            <constraint firstItem="Ygy-eH-vsh" firstAttribute="leading" secondItem="B3f-qy-nHb" secondAttribute="leading" id="ezJ-3m-Yr3"/>
+                            <constraint firstItem="Ygy-eH-vsh" firstAttribute="bottom" secondItem="B3f-qy-nHb" secondAttribute="bottom" constant="34" id="l3k-ha-6AU"/>
+                            <constraint firstItem="B3f-qy-nHb" firstAttribute="trailing" secondItem="ify-IF-fnq" secondAttribute="trailing" constant="15" id="q6m-l1-EQN"/>
+                            <constraint firstItem="B3f-qy-nHb" firstAttribute="trailing" secondItem="Ygy-eH-vsh" secondAttribute="trailing" id="t1q-8a-baM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="B3f-qy-nHb"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2r2-v6-e25">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="ua4-DJ-gkm"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Ygy-eH-vsh" id="s6q-3L-J9F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O7E-9a-5ge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2040.5797101449277" y="166.74107142857142"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
