@@ -34,7 +34,6 @@ class GenericInfoViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func presentImagePicker() {
-        print("Wut?!")
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
