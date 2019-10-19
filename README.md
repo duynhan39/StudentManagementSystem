@@ -94,8 +94,8 @@ Since relations are two-way, adding one student in a class would make that class
 1. `extension`
 1. `UILabel`
 1. `UIButton'
-1. 'UITextField'
-1. 'UITableView'
+1. `UITextField`
+1. `UITableView`
 1. `UITableViewCell`
 1. `UIBarButtonItem`
 1. `UISegmentedControl`
