@@ -93,7 +93,7 @@ Since relations are two-way, adding one student in a class would make that class
 1. `init` of struct and class
 1. `extension`
 1. `UILabel`
-1. `UIButton'
+1. `UIButton`
 1. `UITextField`
 1. `UITableView`
 1. `UITableViewCell`
